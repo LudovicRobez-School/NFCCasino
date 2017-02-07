@@ -1,0 +1,11 @@
+﻿# Jetbrains IDEs
+.idea/
+*.iml
+target/
+*.class
+
+# Eclipse (a mettre à jour par quelqu'un qui l'utilise)
+.project
+.classpath
+.metadata/
+RemoteSystemsTempFiles/
