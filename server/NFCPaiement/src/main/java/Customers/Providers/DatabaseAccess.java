@@ -1,4 +1,4 @@
-package fr.unice.iut.api.providers;
+package Customers.Providers;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
