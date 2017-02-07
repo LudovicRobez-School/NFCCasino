@@ -28,6 +28,4 @@ public interface DataBaseAccess extends AutoCloseable {
         boolean callUpdateProcedure(String query) throws SQLException;
 
         Map<String, String> callSelectProcedureAsMap(String query) throws SQLException;
-
-    }
 }

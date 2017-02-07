@@ -1,5 +1,7 @@
 package Customers.Ressources;
 
+import java.util.Date;
+
 /**
  * Created by rl613611 on 17/01/2017.
  */
@@ -10,7 +12,7 @@ private int cardNumber;
 private int cryptoG;
 private Date expDate;
 
-	public Customer(String fn, String ln, int cn, int cg, int ed){
+	public Customer(String fn, String ln, int cn, int cg, Date ed){
 		firstName=fn;
 		lastName=ln;
 		cardNumber=cn;
