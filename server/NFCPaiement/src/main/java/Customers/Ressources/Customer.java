@@ -38,7 +38,7 @@ private Date expDate;
 		return "FirstName : "+firstName+", LastName : "+lastName+", CardNumber : "+cardNumber+", Cryptograme : "+cryptoG+", ExpirationDate : "+expDate;
 	}
 	public boolean equals(Object obj1){
-		if(this.ToString()==obj1.ToString()) return true;
+		if(this.ToString()==obj1.toString()) return true;
 		else return false;
 	}
 

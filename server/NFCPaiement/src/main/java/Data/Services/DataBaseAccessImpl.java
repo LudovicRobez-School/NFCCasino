@@ -1,4 +1,4 @@
-package Data;
+package Data.Services;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
