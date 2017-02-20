@@ -1,6 +1,5 @@
 package fr.CreditCards.Providers;
 
-import fr.Data.Exceptions.ExceptionDataBase;
 import fr.Data.Services.DataBaseAccess;
 import fr.Data.Services.DataBaseAccessImpl;
 
@@ -27,13 +26,13 @@ public class CreditCardProviders {
         }
     }
 
-    public static ArrayList<Map<String, String>> getAllCreditCards(int customerId) throws Exception {
+    public static ArrayList<Map<String, String>> getAllCreditCardsById(int customerId) throws Exception {
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
             return db.findAllAsMap(String.format(CREDITCARDS_QUERY,customerId));
         }
     }
 
-    public static boolean deleteCreditCard (int creditCardId) throws ExceptionDataBase{
+    public static boolean deleteCreditCard (int creditCardId) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
             db.query(String.format(DELETE_CREDITCARD, creditCardId));
             return true;
@@ -54,8 +53,4 @@ public class CreditCardProviders {
             return false;
         }
     }
-
-
-
-    //TODO: Update et insert creditcard.
 }
