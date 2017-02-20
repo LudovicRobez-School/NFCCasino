@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr</groupId>
+    <artifactId>nfccasino</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>NFCCasino</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>nfcblackjack</module>
+        <module>nfcpoker</module>
+        <module>nfcroulette</module>
+        <module>generallogic</module>
+        <module>nfcpaiement</module>
+        <!-- add your modules here -->
+    </modules>
+
+    <dependencies>
+        <!-- Jetty and jersey to deploy webapps -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlets</artifactId>
+            <version>9.3.13.v20161014</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.24</version>
+        </dependency>
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Compilation -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+
+                <!-- Jetty plugin -->
+                <plugin>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>9.3.13.v20161014</version>
+                    <configuration>
+                        <scanIntervalSeconds>10</scanIntervalSeconds>
+                        <!-- Run more than one webapp -->
+                        <contextHandlers>
+
+                            <contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext">
+                                <war>${project.basedir}/nfcblackjack/target/nfcblackjack-1.0.0.war</war>
+                                <contextPath>/nfcblackjack</contextPath>
+                            </contextHandler>
+
+                            <contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext">
+                                <war>${project.basedir}/nfcpoker/target/nfcpoker-1.0.0.war</war>
+                                <contextPath>/nfcpoker</contextPath>
+                            </contextHandler>
+
+                            <contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext">
+                                <war>${project.basedir}/nfcroulette/target/nfcroulette-1.0.0.war</war>
+                                <contextPath>/nfcroulette</contextPath>
+                            </contextHandler>
+
+                            <contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext">
+                                <war>${project.basedir}/nfcpaiement/target/nfcpaiement-1.0.0.war</war>
+                                <contextPath>/nfcpaiement</contextPath>
+                            </contextHandler>
+
+                            <contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext">
+                                <war>${project.basedir}/generallogic/target/generallogic-1.0.0.war</war>
+                                <contextPath>/generallogic</contextPath>
+                            </contextHandler>
+                            <!---->
+                            <!-- Add your other webapps in contextHandler -->
+                        </contextHandlers>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+    </build>
+</project>
