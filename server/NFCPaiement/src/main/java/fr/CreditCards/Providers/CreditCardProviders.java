@@ -20,7 +20,7 @@ public class CreditCardProviders {
 
     private  final static  String INSERT_CREDITCARD = "DELETE FROM CreditCard WHERE creditCardId = %1$d";
 
-    public Map<String, String> findCreditCardById(int creditCardId, int customerId) throws Exception{
+    public static Map<String, String> findCreditCardById(int creditCardId, int customerId) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
             return db.findOneAsMap(String.format(CREDITCARD_QUERY, creditCardId, customerId));
         }

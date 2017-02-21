@@ -18,9 +18,12 @@ import java.util.*;
  */
 public class Cryptography {
 
-   public static String Chiffrement (String publicKey, String encodedCode) {
+    private static final String privateKeyFile = "";
+    private static final String publicKeyFile = "";
+
+   public static String chiffrementRSA (String encodedCode) {
        //Recuperation de la cle publique
-       PublicKey clePublique = RSAKeyManagement.lectureClePublique(publicKey);
+       PublicKey clePublique = RSAKeyManagement.lectureClePublique(publicKeyFile);
 
        // Chiffrement du message
        byte[] bytes = null;
@@ -44,14 +47,13 @@ public class Cryptography {
 
     /**
     * Methode principale.
-    * @param privateKey nom du fichier dans lequel se trouve la clé privée
     * @param encodedCode message à déchiffrer
     */
 
-    public static Map<String, String> Dechiffrement(String privateKey, String encodedCode) {
+    public static Map<String, String> dechiffrementRSA(String encodedCode) {
 
         // Récupération de la clé privée
-        PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(privateKey);
+        PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(privateKeyFile);
 
         // Déchiffrement du message
         byte[] bytes = encodedCode.getBytes();

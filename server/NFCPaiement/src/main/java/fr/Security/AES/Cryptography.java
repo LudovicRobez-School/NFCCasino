@@ -20,7 +20,7 @@ public class Cryptography {
      * Methode chiffrement.
      * @param message message que l'on veut chiffrer
      */
-    public static String Chiffrement (String message) {
+    public static String chiffrementAES(String message) {
         SecretKeySpec specification = new SecretKeySpec(secretKey.getBytes(), "AES");
         byte[] bytes = null;
         try {
@@ -45,7 +45,7 @@ public class Cryptography {
      * Methode dechiffrement.
      * @param message message que l'on veut dechiffrer
      */
-    public static String Dechiffrement (String message) {
+    public static String dechiffrementAES (String message) {
         SecretKeySpec specification = new SecretKeySpec(secretKey.getBytes(), "AES");
         byte[] bytes = null;
         // Dechiffrement du message
