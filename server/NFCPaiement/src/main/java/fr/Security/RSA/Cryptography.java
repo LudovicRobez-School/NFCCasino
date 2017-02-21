@@ -4,12 +4,12 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import java.util.*;
 
 /**
@@ -64,7 +64,7 @@ public class Cryptography {
             Iterator keys = obj.keys();
             while (keys.hasNext()) {
                 String key = (String) keys.next();
-                mapJSON.put(key, obj.get(key));
+                mapJSON.put(key, obj.getString(key));
             }
             return mapJSON;
         } catch(NoSuchAlgorithmException e) {
@@ -76,6 +76,8 @@ public class Cryptography {
         } catch(IllegalBlockSizeException e) {
             return null;
         } catch(BadPaddingException e) {
+            return null;
+        } catch (JSONException e) {
             return null;
         }
 
