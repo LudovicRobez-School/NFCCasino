@@ -10,7 +10,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by ludov on 20/02/2017.
@@ -53,45 +53,32 @@ public class Cryptography {
         // Récupération de la clé privée
         PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(privateKey);
 
-        // Chargement du message chiffré
-        byte[] messageCode = null;
-        try {
-            FileInputStream fichier = new FileInputStream(encodedCode);
-            messageCode = new byte[fichier.available()];
-            fichier.read(messageCode);
-            fichier.close();
-        } catch(IOException e) {
-            System.err.println("Erreur lors de la lecture du message : " + e);
-            System.exit(-1);
-        }
-
         // Déchiffrement du message
-        byte[] bytes = null;
+        byte[] bytes = encodedCode.getBytes();
         try {
             Cipher dechiffreur = Cipher.getInstance("RSA");
             dechiffreur.init(Cipher.DECRYPT_MODE, clePrivee);
-            bytes = dechiffreur.doFinal(messageCode);
+            bytes = dechiffreur.doFinal(bytes);
+            Map<String,String> mapJSON = new HashMap<String, String>();
+            JSONObject obj = new JSONObject(bytes.toString());
+            Iterator keys = obj.keys();
+            while (keys.hasNext()) {
+                String key = (String) keys.next();
+                mapJSON.put(key, obj.get(key));
+            }
+            return mapJSON;
         } catch(NoSuchAlgorithmException e) {
-            System.err.println("Erreur lors du chiffrement : " + e);
-            System.exit(-1);
+            return null;
         } catch(NoSuchPaddingException e) {
-            System.err.println("Erreur lors du chiffrement : " + e);
-            System.exit(-1);
+            return null;
         } catch(InvalidKeyException e) {
-            System.err.println("Erreur lors du chiffrement : " + e);
-            System.exit(-1);
+            return null;
         } catch(IllegalBlockSizeException e) {
-            System.err.println("Erreur lors du chiffrement : " + e);
-            System.exit(-1);
+            return null;
         } catch(BadPaddingException e) {
-            System.err.println("Erreur lors du chiffrement : " + e);
-            System.exit(-1);
+            return null;
         }
 
-        // Affichage du message
-        String message = new String(bytes);
-        System.out.println("Message : " + message);
-        return null;
     }
 
 }
