@@ -1,17 +1,11 @@
 package fr.Customers.Providers;
 
-import fr.Customers.Ressources.Customer;
 import fr.Data.Services.DataBaseAccess;
 import fr.Data.Services.DataBaseAccessImpl;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
 
-/**
- * Created by rl613611 on 17/01/2017.
- */
 public class CustomerProvider {
 
 
@@ -30,18 +24,6 @@ public class CustomerProvider {
     private final static String INSERT_CUSTOMER = "INSERT INTO Customer (mail, firstName, lastName, password) VALUES ( %1$s, %2$s, %3$s, %4$s)";
 
     private  final static  String DELETE_CUSTOMER = "DELETE FROM Customer WHERE mail = %1$s";
-
-    /*public Map<String, String> findCreditCardById(int creditCardId, int customerId) throws Exception{
-        try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
-            return db.findOneAsMap(String.format(CREDITCARD_QUERY, creditCardId, customerId));
-        }
-    }
-
-    public static ArrayList<Map<String, String>> getAllCreditCardsById(int customerId) throws Exception {
-        try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
-            return db.findAllAsMap(String.format(CREDITCARDS_QUERY,customerId));
-        }
-    }*/
 
     public static ArrayList delBalance (String mail) throws Exception{
         ArrayList a = new ArrayList();

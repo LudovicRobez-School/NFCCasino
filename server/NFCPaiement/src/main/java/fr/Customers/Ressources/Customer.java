@@ -2,11 +2,8 @@ package fr.Customers.Ressources;
 
 import java.util.Date;
 
-/**
- * Created by rl613611 on 17/01/2017.
- */
 public class Customer {
-	private String mail;
+private String mail;
 private String firstName;
 private String lastName;
 private int cardNumber;
@@ -28,7 +25,7 @@ private Date expDate;
 	public int getCryptoG(){return cryptoG;}
 	public Date getExpDate(){return expDate;}
 
-	public void setMail(String m){mail=id;}
+	public void setMail(String m){mail=mail;}
 	public void setFirstName(String fn){firstName=fn;}
 	public void setLastName(String ln){lastName=ln;}
 	public void setCardNumber(int cn){cardNumber=cn;}
@@ -39,7 +36,7 @@ private Date expDate;
 		return new Customer(mail,firstName,lastName,cardNumber,cryptoG,expDate);
 	}
 	public String ToString(){
-		return "IdCustomer : "+mail+", FirstName : "+firstName+", LastName : "+lastName+", CardNumber : "+cardNumber+", Cryptograme : "+cryptoG+", ExpirationDate : "+expDate;
+		return "Mail : "+mail+", FirstName : "+firstName+", LastName : "+lastName+", CardNumber : "+cardNumber+", Cryptograme : "+cryptoG+", ExpirationDate : "+expDate;
 	}
 	public boolean equals(Object obj1){
 		if(this.ToString()==obj1.toString()) return true;
