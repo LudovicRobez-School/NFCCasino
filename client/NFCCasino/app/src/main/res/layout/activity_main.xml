@@ -15,18 +15,18 @@
         android:text="Se connecter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonCo"
+        android:id="@+id/btnConnexion"
         android:minHeight="40dip"
         android:minWidth="80dip"
         android:layout_marginBottom="11dp"
-        android:layout_above="@+id/buttonCreerCompte"
+        android:layout_above="@+id/btnInscription"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:text="Créer un compte"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonCreerCompte"
+        android:id="@+id/btnInscription"
         android:minHeight="40dip"
         android:minWidth="80dip"
         android:layout_marginBottom="33dp"
@@ -97,7 +97,7 @@
         android:minHeight="30dp"
         android:minWidth="300dp"
         android:layout_marginBottom="50dp"
-        android:layout_above="@+id/buttonCo"
+        android:layout_above="@+id/btnConnexion"
         android:layout_toRightOf="@+id/textView2"
         android:layout_toEndOf="@+id/textView2" />
 
