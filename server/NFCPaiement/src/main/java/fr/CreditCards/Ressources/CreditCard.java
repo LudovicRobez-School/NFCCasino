@@ -10,11 +10,21 @@ public class CreditCard {
     private String cardNumber;
     private Date dateExpiration;
     private int cryptogram;
+    private String type;
 
-    public CreditCard(String cardNumber, Date dateExpiration, int cryptogram) {
+    public CreditCard(String cardNumber, Date dateExpiration, int cryptogram, String type) {
         this.cardNumber = cardNumber;
         this.dateExpiration = dateExpiration;
         this.cryptogram = cryptogram;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getCardNumber() {
