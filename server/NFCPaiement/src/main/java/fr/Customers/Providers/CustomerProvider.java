@@ -5,11 +5,12 @@ import fr.Data.Services.DataBaseAccessImpl;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class CustomerProvider {
 
 
-    private final static String SELECTALL_CUSTOMER_QUERY = "SELECT * FROM Customer WHERE mail =%1$s";
+    private final static String INFO_CUSTOMER_QUERY = "SELECT * FROM Customer WHERE mail =%1$s";
 
     private final static String UPDATE_FIRSTNAME_QUERY = "UPDATE Customer SET firstName = %1$s WHERE mail = %2$s";
 
@@ -19,30 +20,60 @@ public class CustomerProvider {
 
     private final static String UPDATE_BALANCE_QUERY = "UPDATE Customer SET balance = %1$d WHERE mail = %2$s";
 
-    private final static String GET_BALANCE_QUERY = "SELECT balance FROM Customer WHERE mail = %1$s";
+    private final static String GET_BALANCE_QUERY = "SELECT balance FROM Customer WHERE mail = %1$s"; // J'ai pas changer en Map pasque ca retourne juste 1 seule atribut et c'est plues facile de retourner juste un double
 
-    private final static String INSERT_CUSTOMER = "INSERT INTO Customer (mail, firstName, lastName, password) VALUES ( %1$s, %2$s, %3$s, %4$s)";
+    private final static String INSERT_CUSTOMER = "INSERT INTO Customer (mail, firstName, lastName, password, country, adress, postal, state) VALUES ( %1$s, %2$s, %3$s, %4$s, %5$s, %6$s, %7$s, %8$s)";
 
     private  final static  String DELETE_CUSTOMER = "DELETE FROM Customer WHERE mail = %1$s";
 
-    public static ArrayList delBalance (String mail) throws Exception{
-        ArrayList a = new ArrayList();
+    private  final static  String UPDATE_COUNTRY_QUERY = "UPDATE Customer SET country = %1$s WHERE mail = %2$s";
+
+    private  final static  String UPDATE_ADRESS_QUERY = "UPDATE Customer SET adress = %1$s WHERE mail = %2$s";
+
+    private  final static  String UPDATE_POSTAL_QUERY = "UPDATE Customer SET postal = %1$s WHERE mail = %2$s";
+
+    private  final static  String UPDATE_STATE_QUERY = "UPDATE Customer SET state = %1$s WHERE mail = %2$s";
+
+    private  final static  String UPDATE_ALLOFCUSTOMER_QUERY = "UPDATE Customer SET country = %1$s, adress = %2$s, postal = %3$s, state = %4$s, WHERE mail = %5$s";
+
+
+    public static boolean updateInfoCustomer (String mail, String country, String adress, String postal, String state) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
-            ResultSet rs=db.query(String.format(SELECTALL_CUSTOMER_QUERY, mail));
-
-            while(rs.next()){
-                a.add(rs.getString(1));
-                a.add(rs.getString(2));
-                a.add(rs.getString(3));
-                a.add(rs.getString(4));
-                a.add(rs.getDouble(5));
-            }
-            return a;
-
+            db.query(String.format(UPDATE_ALLOFCUSTOMER_QUERY, country, adress, postal, state, mail));
+            return true;
         }
-        catch (Exception e)
-        {
-            return null;
+    }
+
+    public static boolean changeCountry (String mail, String country) throws Exception{
+        try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
+            db.query(String.format(UPDATE_COUNTRY_QUERY, country, mail));
+            return true;
+        }
+    }
+
+    public static boolean changeAdress (String mail, String adress) throws Exception{
+        try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
+            db.query(String.format(UPDATE_ADRESS_QUERY, adress, mail));
+            return true;
+        }
+    }
+
+    public static boolean changePostal (String mail, String postal) throws Exception{
+        try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
+            db.query(String.format(UPDATE_POSTAL_QUERY, postal, mail));
+            return true;
+        }
+    }
+    public static boolean changeState (String mail, String state) throws Exception{
+        try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
+            db.query(String.format(UPDATE_STATE_QUERY, state, mail));
+            return true;
+        }
+    }
+
+    public static Map<String,String> CustomerInfo (String mail) throws Exception{
+        try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
+            return db.findOneAsMap(String.format(INFO_CUSTOMER_QUERY, mail));
         }
     }
 
@@ -51,20 +82,12 @@ public class CustomerProvider {
             db.query(String.format(UPDATE_FIRSTNAME_QUERY, fn, mail));
             return true;
         }
-        catch (Exception e)
-        {
-            return false;
-        }
     }
 
     public static boolean changeLastName (String mail, String ls) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
             db.query(String.format(UPDATE_LASTNAME_QUERY, ls, mail));
             return true;
-        }
-        catch (Exception e)
-        {
-            return false;
         }
     }
 
@@ -73,12 +96,13 @@ public class CustomerProvider {
             db.query(String.format(UPDATE_PASSWORD_QUERY, pass, mail));
             return true;
         }
-        catch (Exception e)
-        {
-            return false;
+    }
+    public static double getBalance (String mail) throws Exception {
+        try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
+            ResultSet rs = db.query(String.format(GET_BALANCE_QUERY, mail));
+            return rs.getDouble("balance");
         }
     }
-
     public static boolean delBalance (String mail, double balance) throws Exception{
         double b;
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
@@ -92,10 +116,6 @@ public class CustomerProvider {
             } catch (Exception e) {
                 return false;
             }
-        }
-        catch (Exception e)
-        {
-            return false;
         }
     }
 
@@ -115,10 +135,6 @@ public class CustomerProvider {
                 return false;
             }
         }
-        catch (Exception e)
-        {
-            return false;
-        }
     }
 
 
@@ -127,20 +143,12 @@ public class CustomerProvider {
             db.query(String.format(DELETE_CUSTOMER, mail));
             return true;
         }
-        catch (Exception e)
-        {
-            return false;
-        }
     }
 
-    public static boolean insertCustomer(String mail, String firstName, String lastName, String password) throws Exception{
+    public static boolean insertCustomer(String mail, String firstName, String lastName, String password, String contry, String adress, String postal, String state) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
-            db.query(String.format(INSERT_CUSTOMER, mail, firstName, lastName, password));
+            db.query(String.format(INSERT_CUSTOMER, mail, firstName, lastName, password, contry, adress, postal, state));
             return true;
-        }
-        catch (Exception e)
-        {
-            return false;
         }
     }
 }

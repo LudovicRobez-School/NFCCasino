@@ -19,7 +19,10 @@ import com.paypal.api.payments.FundingInstrument;
 import com.paypal.api.payments.Payer;
 import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.Transaction;
+
 import fr.Customers.Ressources.Customer;
+
+import static com.oracle.jrockit.jfr.ContentType.Address;
 
 public class PaiementProcess {
 
@@ -53,7 +56,7 @@ public class PaiementProcess {
 // Credit card info
         CreditCard creditCard = new CreditCard();
         creditCard.setBillingAddress(billingAddress);
-        creditCard.setExpireMonth(myCreditCard.getCryptogram());
+        creditCard.setExpireMonth(myCreditCard.getDateExpiration());
         creditCard.setExpireYear(myCreditCard.getCryptogram());
         creditCard.setFirstName(customer.getFirstName());
         creditCard.setLastName(customer.getLastName());
