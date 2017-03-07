@@ -56,8 +56,8 @@ public class PaiementProcess {
 // Credit card info
         CreditCard creditCard = new CreditCard();
         creditCard.setBillingAddress(billingAddress);
-        creditCard.setExpireMonth(myCreditCard.getDateExpiration());
-        creditCard.setExpireYear(myCreditCard.getCryptogram());
+        creditCard.setExpireMonth(myCreditCard.getDateExpiration()); // t'es vraiment gay ici faut mettre juste le mois (pas en Date)
+        creditCard.setExpireYear(myCreditCard.getCryptogram());// et ici c'est l'année, pas le cryptogramme fdp
         creditCard.setFirstName(customer.getFirstName());
         creditCard.setLastName(customer.getLastName());
         creditCard.setNumber(myCreditCard.getCardNumber());
