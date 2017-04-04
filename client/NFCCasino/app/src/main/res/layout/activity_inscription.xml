@@ -88,17 +88,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Ville"
         android:ems="10"
         android:id="@+id/editVille"
         android:textSize="14sp"
         android:layout_below="@+id/editCodePostal"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:hint="Nice"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:inputType="textPersonName"
-        android:text="Pays"
         android:ems="10"
         android:id="@+id/editPays"
         android:textSize="14sp"
@@ -106,57 +105,59 @@
         android:layout_alignBaseline="@+id/textView11"
         android:layout_alignBottom="@+id/textView11"
         android:layout_alignLeft="@+id/editRegion"
-        android:layout_alignStart="@+id/editRegion" />
+        android:layout_alignStart="@+id/editRegion"
+        android:hint="France"/>
+    />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Adresse"
         android:ems="10"
         android:id="@+id/editAdresse"
         android:textSize="14sp"
         android:layout_alignBaseline="@+id/textView7"
         android:layout_alignBottom="@+id/textView7"
         android:layout_alignLeft="@+id/editVille"
-        android:layout_alignStart="@+id/editVille" />
+        android:layout_alignStart="@+id/editVille"
+        android:hint="12 avenue de la Californie"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Nom"
         android:ems="10"
         android:id="@+id/editNom"
         android:textSize="14sp"
         android:layout_below="@+id/editPrenom"
         android:layout_alignLeft="@+id/editAdresse"
-        android:layout_alignStart="@+id/editAdresse" />
+        android:layout_alignStart="@+id/editAdresse"
+        android:hint="DUPONT"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Prénom"
         android:ems="10"
         android:id="@+id/editPrenom"
         android:textSize="14sp"
         android:layout_below="@+id/editText4"
         android:layout_alignLeft="@+id/editNom"
-        android:layout_alignStart="@+id/editNom" />
+        android:layout_alignStart="@+id/editNom"
+        android:hint="Michel"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Mail"
         android:ems="10"
         android:id="@+id/editText4"
         android:textSize="14sp"
         android:layout_alignBaseline="@+id/textView4"
         android:layout_alignBottom="@+id/textView4"
         android:layout_alignLeft="@+id/editPrenom"
-        android:layout_alignStart="@+id/editPrenom" />
+        android:layout_alignStart="@+id/editPrenom"
+        android:hint="user@nfc.com"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -168,20 +169,21 @@
         android:layout_alignBaseline="@+id/textView8"
         android:layout_alignBottom="@+id/textView8"
         android:layout_alignLeft="@+id/editAdresse"
-        android:layout_alignStart="@+id/editAdresse" />
+        android:layout_alignStart="@+id/editAdresse"
+        android:hint="06200"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Région"
         android:ems="10"
         android:id="@+id/editRegion"
         android:textSize="14sp"
         android:layout_alignBaseline="@+id/textView10"
         android:layout_alignBottom="@+id/textView10"
         android:layout_alignLeft="@+id/editVille"
-        android:layout_alignStart="@+id/editVille" />
+        android:layout_alignStart="@+id/editVille"
+        android:hint="Provence Alpes Côte d'Azur"/>
 
     <Button
         android:text="Retour"
