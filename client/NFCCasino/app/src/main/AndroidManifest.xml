@@ -21,6 +21,12 @@
         <activity android:name=".ProfilActivity"/>
         <activity android:name=".InscriptionActivity" />
         <activity android:name=".NFCActivity" />
+        <activity android:name=".LectureNFCActivity" android:label="RActivity">
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

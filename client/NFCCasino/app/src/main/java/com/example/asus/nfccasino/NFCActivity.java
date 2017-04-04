@@ -17,6 +17,8 @@ import java.util.Locale;
  */
 
 public class NFCActivity extends AppCompatActivity {
+    // Profil
+    User user;
     // NFC
     NfcAdapter nfcAdapter;
 
@@ -25,16 +27,18 @@ public class NFCActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc);
 
+        user = getIntent().getExtras().getParcelable("user");
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
-        Button retour = (Button) findViewById(R.id.btnRetour);
-        retour.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
+        Button back = (Button) findViewById(R.id.btnBack);
+        back.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
             @Override
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
+                nfcAdapter.disableForegroundDispatch(NFCActivity.this);
                 Intent intent = new Intent(NFCActivity.this, ProfilActivity.class);  //Lancer l'activité
-                //intent.putExtra("user", user); // Envoyer l'activité
+                intent.putExtra("user", user); // Envoyer l'activité
                 startActivity(intent);    //Afficher la vue
                 finish();
             }

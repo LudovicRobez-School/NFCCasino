@@ -31,12 +31,22 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnCredit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Créditer un compte"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:text="Créditer un compte" />
+
+    <Button
+        android:id="@+id/btnLecture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnBack"
+        android:layout_alignRight="@+id/btnBack"
+        android:layout_below="@+id/btnCredit"
+        android:layout_marginTop="22dp"
+        android:text="Lecture" />
 
 
 </RelativeLayout>

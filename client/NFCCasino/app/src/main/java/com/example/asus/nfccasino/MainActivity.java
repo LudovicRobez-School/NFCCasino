@@ -29,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
-                //if (editLogin.getText().toString() ==  editMdp.getText().toString()){
+                if (editLogin.getText().toString().equals("test") && editMdp.getText().toString().equals("test")){
                     user = new User(editLogin.getText().toString());
                     Intent intent = new Intent(MainActivity.this, ProfilActivity.class);  //Lancer l'activité
                     intent.putExtra("user", user); // Envoyer l'activité
                     startActivity(intent);    //Afficher la vue
                     finish();
-                /*
+
                 } else
                 {
                     Log.i("login",editLogin.getText().toString());
@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                 }
-                */
                 //Intent i = new Intent(getApplicationContext(), ProfilActivity.class);
                 //startActivity(i);
             }

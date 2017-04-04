@@ -28,13 +28,41 @@ public class ProfilActivity extends AppCompatActivity {
         TextView txtLogin = (TextView) findViewById(R.id.txtLogin);
         txtLogin.setText(user.getLogin());
 
-        Button nfc = (Button) findViewById(R.id.button);
+        Button nfc = (Button) findViewById(R.id.btnCredit);
         nfc.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
             @Override
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
                 Intent intent = new Intent(ProfilActivity.this, NFCActivity.class);  //Lancer l'activité
+                intent.putExtra("user", user); // Envoyer l'activité
+                startActivity(intent);    //Afficher la vue
+                finish();
+            }
+
+        });
+
+        Button lecture = (Button) findViewById(R.id.btnLecture);
+        lecture.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
+        {
+            @Override
+            public void onClick(View activity_main)    //Au clic sur le bouton
+            {
+                Intent intent = new Intent(ProfilActivity.this, LectureNFCActivity.class);  //Lancer l'activité
+                intent.putExtra("user", user); // Envoyer l'activité
+                startActivity(intent);    //Afficher la vue
+                finish();
+            }
+
+        });
+
+        Button back = (Button) findViewById(R.id.btnBack);
+        back.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
+        {
+            @Override
+            public void onClick(View activity_main)    //Au clic sur le bouton
+            {
+                Intent intent = new Intent(ProfilActivity.this, MainActivity.class);  //Lancer l'activité
                 //intent.putExtra("user", user); // Envoyer l'activité
                 startActivity(intent);    //Afficher la vue
                 finish();
