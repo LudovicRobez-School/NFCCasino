@@ -16,7 +16,7 @@ public class CreditCardProviders {
 
     private final static String CREDITCARDS_QUERY = "SELECT * FROM CreditCard WHERE customerId = %1$d";
 
-    private final static String DELETE_CREDITCARD = "INSERT INTO CreditCard (customerId, cardNumber, dateExpiration, cryptogram) VALUES ( %1$d, %2$s, %3$s, %4$d)";
+    private final static String DELETE_CREDITCARD = "INSERT INTO CreditCard (customerId, cardNumber, dateExpiration, cryptogram, type) VALUES ( %1$d, %2$s, %3$s, %4$d, %5$s)";
 
     private  final static  String INSERT_CREDITCARD = "DELETE FROM CreditCard WHERE creditCardId = %1$d";
 
@@ -43,9 +43,9 @@ public class CreditCardProviders {
         }
     }
 
-    public static boolean insertCreditCard(int customerId, String cardNumber, Date dateExpiration, int cryptogram) throws Exception{
+    public static boolean insertCreditCard(int customerId, String cardNumber, int dateExpiration, int cryptogram, String type) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
-            db.query(String.format(INSERT_CREDITCARD, customerId, cardNumber, dateExpiration, cryptogram));
+            db.query(String.format(INSERT_CREDITCARD, customerId, cardNumber, dateExpiration, cryptogram, type));
             return true;
         }
         catch (Exception e)
