@@ -8,11 +8,11 @@ import java.util.Date;
 public class CreditCard {
 
     private String cardNumber;
-    private Date dateExpiration;
+    private int dateExpiration;
     private int cryptogram;
     private String type;
 
-    public CreditCard(String cardNumber, Date dateExpiration, int cryptogram, String type) {
+    public CreditCard(String cardNumber, int dateExpiration, int cryptogram, String type) {
         this.cardNumber = cardNumber;
         this.dateExpiration = dateExpiration;
         this.cryptogram = cryptogram;
@@ -35,11 +35,11 @@ public class CreditCard {
         this.cardNumber = cardNumber;
     }
 
-    public Date getDateExpiration() {
+    public int getDateExpiration() {
         return dateExpiration;
     }
 
-    public void setDateExpiration(Date dateExpiration) {
+    public void setDateExpiration(int dateExpiration) {
         this.dateExpiration = dateExpiration;
     }
 
