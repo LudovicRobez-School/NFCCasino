@@ -35,8 +35,8 @@ public class ProfilActivity extends AppCompatActivity {
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
                 Intent intent = new Intent(ProfilActivity.this, NFCActivity.class);  //Lancer l'activité
-                intent.putExtra("user", user); // Envoyer l'activité
                 startActivity(intent);    //Afficher la vue
+                intent.putExtra("user", user); // Envoyer l'activité
                 finish();
             }
 
