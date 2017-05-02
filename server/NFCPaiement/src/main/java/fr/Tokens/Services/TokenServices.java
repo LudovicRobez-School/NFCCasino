@@ -14,11 +14,13 @@ public interface TokenServices {
     Response addToken(String EncodedInfos);
 
     @GET
+    @Path("/{EncodedInfos}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    Response getToken(String EncodedInfos);
+    Response getToken(@PathParam("EncodedInfos") String EncodedInfos);
 
-    @DELETE
+    @POST
+    @Path("/{EncodedInfos}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response deleteToken(String EncodedInfos);
+    Response deleteToken(@PathParam("EncodedInfos") String EncodedInfos);
 }

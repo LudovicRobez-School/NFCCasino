@@ -5,6 +5,7 @@ import fr.Tokens.Providers.TokensProvider;
 import fr.Tokens.Ressources.Token;
 import org.codehaus.jettison.json.JSONObject;
 
+import fr.
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.Map;
@@ -30,10 +31,17 @@ public class TokenServicesImpl implements TokenServices {
 
     @Override
     public Response getToken(String EncodedInfos) {
+        CreditCard creditCard;
+        Customer idC;
+        int thune;
         try{
             Map<String,String> json = Cryptography.dechiffrementRSA(EncodedInfos);
-            JSONObject jsonToken = new JSONObject(TokensProvider.findTokenById(json.get("token")));
-            //TODO: Implementation du systeme de Paiement
+            Map<String,String> result = TokensProvider.findTokenById(json.get("token"));
+            Cred
+                creditCard=CreditCardProviders.get sult.get("creditCardId");
+                idC=result.getJSONObject(i).getInt("customerId");
+                thune= result.getJSONObject(i).getInt("somme");
+
             return Response.ok().build();
         }catch (Exception e){
             return Response.status(Response.Status.NOT_FOUND).build();
