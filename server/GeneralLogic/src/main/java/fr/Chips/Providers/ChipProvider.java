@@ -18,7 +18,7 @@ public class ChipProvider {
 
     public static Map<String, String> findChipsById(String id) {
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()){
-            return db.findOneAsMap(String.format(PLAYER_QUERY, id));
+            return db.findOneAsMap(String.format(CHIPS_AT_PLAYER_QUERY, id));
         }
         catch (Exception e){
             throw new ChipException("Error while findChipsById()", e);
@@ -28,7 +28,7 @@ public class ChipProvider {
     public static Map<String, String> addChips(int playerId,int solde){
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()){
             Map<Chip,Integer> chips = ChipGenerator.generateChips(solde);
-            return db.findOneAsMap(String.format(ADD_PLAYER, player.getLastName(), player.getFirstName(), player.getSolde()));
+            return db.findOneAsMap(String.format(ADD_CHIPS_AT_PLAYER, player.getLastName(), player.getFirstName(), player.getSolde()));
         }
         catch (Exception e){
             throw new ChipException("Error while addChips()", e);

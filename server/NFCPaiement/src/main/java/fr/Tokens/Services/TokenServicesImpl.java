@@ -1,16 +1,17 @@
 package fr.Tokens.Services;
 
+import fr.CreditCards.Providers.CreditCardProviders;
+import fr.CreditCards.Ressources.CreditCard;
+import fr.Customers.Providers.CustomerProvider;
+import fr.Customers.Ressources.Customer;
 import fr.Security.RSA.Cryptography;
+import fr.Tokens.Providers.PaiementProcess;
 import fr.Tokens.Providers.TokensProvider;
 import fr.Tokens.Ressources.Token;
-import org.codehaus.jettison.json.JSONObject;
 
-import fr.
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.Map;
-
-import static java.lang.Integer.parseInt;
 
 /**
  * Created by rl613611 on 21/02/2017.
@@ -31,17 +32,14 @@ public class TokenServicesImpl implements TokenServices {
 
     @Override
     public Response getToken(String EncodedInfos) {
-        CreditCard creditCard;
-        Customer idC;
-        int thune;
         try{
             Map<String,String> json = Cryptography.dechiffrementRSA(EncodedInfos);
-            Map<String,String> result = TokensProvider.findTokenById(json.get("token"));
-            Cred
-                creditCard=CreditCardProviders.get sult.get("creditCardId");
-                idC=result.getJSONObject(i).getInt("customerId");
-                thune= result.getJSONObject(i).getInt("somme");
-
+            Map<String,String> resultToken = TokensProvider.findTokenById(json.get("token"));
+            Map<String,String> resultCreditCard = CreditCardProviders.findCreditCardById(Integer.parseInt(resultToken.get("creditCardId")), Integer.parseInt(resultToken.get("customerId")));
+            Map<String,String> resultCustomer = CustomerProvider.CustomerInfo(resultToken.get("customerId"));
+            CreditCard creditCard = new CreditCard(resultCreditCard.get("cardNumber"), Integer.parseInt(resultCreditCard.get("dateExpiration")), Integer.parseInt(resultCreditCard.get("cryptogram")), resultCreditCard.get("type"));
+            Customer customer = new Customer(resultCustomer.get("mail"), resultCustomer.get("firstName"), resultCustomer.get("lastName"), resultCustomer.get("city"), resultCustomer.get("country"), resultCustomer.get("address"), resultCustomer.get("postalCode"), resultCustomer.get("state"));
+            new PaiementProcess().initPaiement(creditCard, customer, Integer.parseInt(resultToken.get("somme")));
             return Response.ok().build();
         }catch (Exception e){
             return Response.status(Response.Status.NOT_FOUND).build();
