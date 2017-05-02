@@ -5,7 +5,7 @@ import fr.Tokens.Providers.TokensProvider;
 import fr.Tokens.Ressources.Token;
 import org.codehaus.jettison.json.JSONObject;
 
-import fr.
+
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.Map;
