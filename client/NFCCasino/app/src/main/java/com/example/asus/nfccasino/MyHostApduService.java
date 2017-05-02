@@ -24,7 +24,7 @@ public class MyHostApduService extends HostApduService {
 
 	private byte[] getWelcomeMessage() {
         //byte[] tabRep = {"Hello Desktop!".getBytes()[0], "Hello Desktop!".getBytes()[1], (byte)0x90, (byte)0x00};
-		byte[] tabRep = {(byte)0x90, (byte)0x00};
+		byte[] tabRep = {"FDP".getBytes()[0], "FDP".getBytes()[1], "FDP".getBytes()[2], (byte)0x90, (byte)0x00};
         return tabRep;
 	}
 
