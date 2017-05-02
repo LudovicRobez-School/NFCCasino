@@ -7,8 +7,7 @@ package fr.Tokens.Providers;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 
-import java.text.Format;
-import java.util.List;
+import java.lang.String;
 import java.util.ArrayList;
 
 import com.paypal.api.payments.Address;
@@ -21,8 +20,6 @@ import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.Transaction;
 
 import fr.Customers.Ressources.Customer;
-
-import static com.oracle.jrockit.jfr.ContentType.Address;
 
 public class PaiementProcess {
 
@@ -56,8 +53,9 @@ public class PaiementProcess {
 // Credit card info
         CreditCard creditCard = new CreditCard();
         creditCard.setBillingAddress(billingAddress);
-        creditCard.setExpireMonth(myCreditCard.getDateExpiration()); // t'es vraiment gay ici faut mettre juste le mois (pas en Date)
-        creditCard.setExpireYear(myCreditCard.getCryptogram());// et ici c'est l'année, pas le cryptogramme fdp
+        creditCard.setExpireMonth(Integer.getInteger(Integer.toString(myCreditCard.getDateExpiration()).substring(0,1)));
+        creditCard.setExpireYear(Integer.getInteger(Integer.toString(myCreditCard.getDateExpiration()).substring(2,3)));
+        creditCard.setCvv2(Integer.toString(myCreditCard.getCryptogram()));
         creditCard.setFirstName(customer.getFirstName());
         creditCard.setLastName(customer.getLastName());
         creditCard.setNumber(myCreditCard.getCardNumber());

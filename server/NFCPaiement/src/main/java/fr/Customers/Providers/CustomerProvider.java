@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Map;
 
+
+// Marc remplace les db.query par db.update lors des insert ou des update. De plus db.update retourne un booleen si il s'est bien executé.
 public class CustomerProvider {
 
 
@@ -46,7 +48,7 @@ public class CustomerProvider {
 
     public static boolean changeCountry (String mail, String country) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
-            db.query(String.format(UPDATE_COUNTRY_QUERY, country, mail));
+            db.update(String.format(UPDATE_COUNTRY_QUERY, country, mail));
             return true;
         }
     }
@@ -119,6 +121,7 @@ public class CustomerProvider {
         }
     }
 
+    //Marc Pas besoin de reouvrir une db car il s'agit de la meme db la db sera automatiquement fermer a la fin
     public static boolean addBalance (String mail, double balance) throws Exception{
         double b;
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
