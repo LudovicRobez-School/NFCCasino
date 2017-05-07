@@ -37,6 +37,7 @@ public class CreditCardServicesImpl implements CreditCardServices{
         try {
             Map<String, String> json = Cryptography.dechiffrementRSA(EncodedInfos);
             CreditCardProviders.insertCreditCard(Integer.parseInt(json.get("customerId")), json.get("cardNumber"), Integer.parseInt(json.get("dateExpiration")), Integer.parseInt(json.get("cryptogram")), json.get("type"));
+            CreditCardProviders.insertCreditCard(Integer.parseInt(json.get("customerId")), json.get("cardNumber"),Integer.parseInt(json.get("dateExpiration"))), Integer.parseInt(json.get("cryptogram")), json.get("");
             return Response.status(Response.Status.CREATED).build();
         } catch (Exception e) {
             return Response.status(Response.Status.NOT_FOUND).build();
