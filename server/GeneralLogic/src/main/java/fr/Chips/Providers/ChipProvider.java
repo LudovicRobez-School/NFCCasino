@@ -10,7 +10,7 @@ import java.util.Map;
  * Created by rl613611 on 20/03/2017.
  */
 public class ChipProvider {
-
+/*
     private static final String UPDATE_CHIPS_AT_PLAYER  = "";
     private static final String ADD_CHIPS_AT_PLAYER = "";
     private static final String CHIPS_AT_PLAYER_QUERY = "";
@@ -38,5 +38,5 @@ public class ChipProvider {
     public static boolean changeChip(){
 
     }
-
+*/
 }

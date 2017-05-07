@@ -20,7 +20,7 @@ public class Player {
         this.lastName = lastName;
         this.firstName = firstName;
         this.solde = solde;
-        chips = ChipGenerator.generateChips(solde);
+        //chips = ChipGenerator.generateChips(solde);
     }
 
     public String getLastName() {

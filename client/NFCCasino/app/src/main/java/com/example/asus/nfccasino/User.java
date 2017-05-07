@@ -7,6 +7,8 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.asus.nfccasino.AES.Cryptography;
+
 
 class User implements Parcelable {
 
@@ -139,7 +141,10 @@ class User implements Parcelable {
     }
 
     public String getInfo(String login) {
-        String URL  = "" + login;
+        String urlCrypt = "";
+        Cryptography crypt = new Cryptography();
+        crypt.chiffrementAES("");
+        String URL  = "http://localhost:8080/" + urlCrypt + login;
         Http requete = new Http();
         requete.execute("GET",URL,"");
         String result ="";

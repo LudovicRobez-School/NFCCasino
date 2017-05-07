@@ -12,31 +12,31 @@ import java.util.Map;
 public class CustomerProvider {
 
 
-    private final static String INFO_CUSTOMER_QUERY = "SELECT * FROM Customer WHERE mail =%1$s";
+    private final static String INFO_CUSTOMER_QUERY = "SELECT * FROM Customer WHERE c_mail =%1$s";
 
-    private final static String UPDATE_FIRSTNAME_QUERY = "UPDATE Customer SET firstName = %1$s WHERE mail = %2$s";
+    private final static String UPDATE_FIRSTNAME_QUERY = "UPDATE Customer SET c_firstname = %1$s WHERE c_mail = %2$s";
 
-    private final static String UPDATE_LASTNAME_QUERY = "UPDATE Customer SET lastName = %1$s WHERE mail = %2$s";
+    private final static String UPDATE_LASTNAME_QUERY = "UPDATE Customer SET c_lastname = %1$s WHERE c_mail = %2$s";
 
-    private final static String UPDATE_PASSWORD_QUERY = "UPDATE Customer SET password = %1$s WHERE mail = %2$s";
+    private final static String UPDATE_PASSWORD_QUERY = "UPDATE Customer SET c_password = %1$s WHERE c_mail = %2$s";
 
-    private final static String UPDATE_BALANCE_QUERY = "UPDATE Customer SET balance = %1$d WHERE mail = %2$s";
+    private final static String UPDATE_BALANCE_QUERY = "UPDATE Customer SET c_balance = %1$f WHERE c_mail = %2$s";
 
-    private final static String GET_BALANCE_QUERY = "SELECT balance FROM Customer WHERE mail = %1$s"; // J'ai pas changer en Map pasque ca retourne juste 1 seule atribut et c'est plues facile de retourner juste un double
+    private final static String GET_BALANCE_QUERY = "SELECT c_balance FROM Customer WHERE c_mail = %1$s"; // J'ai pas changer en Map pasque ca retourne juste 1 seule atribut et c'est plues facile de retourner juste un double
 
-    private final static String INSERT_CUSTOMER = "INSERT INTO Customer (mail, firstName, lastName, password, country, adress, postal, state) VALUES ( %1$s, %2$s, %3$s, %4$s, %5$s, %6$s, %7$s, %8$s)";
+    private final static String INSERT_CUSTOMER = "INSERT INTO Customer(c_mail, c_password, c_firstname, c_lastname, c_address, c_zipcode, c_city, c_state, c_country) VALUES (%2$s, %3$s, %4$s, %5$s, %6$s, %7$s, %8$s, %9$s)";
 
-    private  final static  String DELETE_CUSTOMER = "DELETE FROM Customer WHERE mail = %1$s";
+    private  final static  String DELETE_CUSTOMER = "DELETE FROM Customer WHERE c_mail = %1$s";
 
-    private  final static  String UPDATE_COUNTRY_QUERY = "UPDATE Customer SET country = %1$s WHERE mail = %2$s";
+    private  final static  String UPDATE_COUNTRY_QUERY = "UPDATE Customer SET c_country = %1$s WHERE c_mail = %2$s";
 
-    private  final static  String UPDATE_ADRESS_QUERY = "UPDATE Customer SET adress = %1$s WHERE mail = %2$s";
+    private  final static  String UPDATE_ADRESS_QUERY = "UPDATE Customer SET c_address = %1$s WHERE c_mail = %2$s";
 
-    private  final static  String UPDATE_POSTAL_QUERY = "UPDATE Customer SET postal = %1$s WHERE mail = %2$s";
+    private  final static  String UPDATE_POSTAL_QUERY = "UPDATE Customer SET c_zipcode = %1$s WHERE c_mail = %2$s";
 
-    private  final static  String UPDATE_STATE_QUERY = "UPDATE Customer SET state = %1$s WHERE mail = %2$s";
+    private  final static  String UPDATE_STATE_QUERY = "UPDATE Customer SET c_state = %1$s WHERE c_mail = %2$s";
 
-    private  final static  String UPDATE_ALLOFCUSTOMER_QUERY = "UPDATE Customer SET country = %1$s, adress = %2$s, postal = %3$s, state = %4$s, WHERE mail = %5$s";
+    private  final static  String UPDATE_ALLOFCUSTOMER_QUERY = "UPDATE Customer SET c_country = %1$s, c_address = %2$s, c_postal = %3$s, c_state = %4$s, WHERE c_mail = %5$s";
 
 
     public static boolean updateInfoCustomer (String mail, String country, String adress, String postal, String state) throws Exception{

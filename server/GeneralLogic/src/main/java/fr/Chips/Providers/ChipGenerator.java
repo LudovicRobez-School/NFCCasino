@@ -10,7 +10,7 @@ import java.util.Map;
  */
 
 public class ChipGenerator {
-
+/*
     public static Map<Chip,Integer> generateChips(int solde){
         Map<Chip,Integer> chips = new HashMap<Chip,Integer>();
         int numberChip;
@@ -73,4 +73,5 @@ public class ChipGenerator {
                 break;
         }
     }
+	*/
 }

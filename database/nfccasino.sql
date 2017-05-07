@@ -1,21 +1,27 @@
---DROP DATABASE `nfccasino`;
+DROP database `nfccasino`;
+
+/*
+DROP DATABASE `nfccasino`;
+*/
 CREATE DATABASE  IF NOT EXISTS `nfccasino` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `nfccasino`;
 
 CREATE TABLE IF NOT EXISTS Customer (
   c_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   c_mail varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  c_password varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   c_firstname varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   c_lastname varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   c_address varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   c_zipcode varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   c_city varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  c_region varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  c_state varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  c_state varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  c_country varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  c_balance float(11) DEFAULT 0
 );
 
-INSERT INTO Customer(c_id, c_mail, c_firstname, c_lastname, c_address, c_zipcode, c_city, c_region, c_state)
-VALUES (1, "test@mail.com", "Michel", "DUPONT", "10 avenue de la Californie", "06200", "Nice", "PACA", "France");
+INSERT INTO Customer(c_id, c_mail, c_password, c_firstname, c_lastname, c_address, c_zipcode, c_city, c_state, c_country)
+VALUES (1, "test@mail.com", "test", "Michel", "DUPONT", "10 avenue de la Californie", "06200", "Nice", "PACA", "France");
 
 CREATE TABLE IF NOT EXISTS BankCard (
   b_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
