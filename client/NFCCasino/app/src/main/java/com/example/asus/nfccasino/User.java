@@ -143,7 +143,7 @@ class User implements Parcelable {
     public String getInfo(String login) {
         String urlCrypt = "";
         Cryptography crypt = new Cryptography();
-        crypt.chiffrementAES("");
+        crypt.chiffrementAES("security");
         String URL  = "http://localhost:8080/" + urlCrypt + login;
         Http requete = new Http();
         requete.execute("GET",URL,"");

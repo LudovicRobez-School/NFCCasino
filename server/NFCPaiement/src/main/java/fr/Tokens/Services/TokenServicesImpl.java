@@ -9,10 +9,6 @@ import fr.Tokens.Providers.PaiementProcess;
 import fr.Tokens.Providers.TokensProvider;
 import fr.Tokens.Ressources.Token;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b9cf235d886358fa8a9f96ae81309f004802bcab
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.Map;
