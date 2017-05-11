@@ -1,21 +1,26 @@
 package fr.Customers.Services;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import fr.Customers.Providers.CustomerProvider;
 
-import javax.xml.ws.Response;
+import com.owlike.genson.Genson;
+import com.sun.prism.PhongMaterial;
+import fr.Customers.Providers.CustomerProvider;
+import fr.Security.RSA.Cryptography;
+
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
+import java.util.Map;
 
 /**
  * Created by rl613611 on 17/01/2017.
  */
-public class CostumersServicesImpl implements CustomersServices {
+public class CostomersServicesImpl implements CustomersServices {
 
+    Genson genson = new Genson();
 
     @Override
-    public Response CustomerInfo(String customer) {
+    public Response getCustomer(String customerId) {
         try{
-            return Response.ok(CustomerProvider.CustomerInfo(customer).toString()).build();
+            return Response.ok(CustomerProvider.findCustomerById(customerId)).build();
         }
         catch(Exception e){
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -23,24 +28,48 @@ public class CostumersServicesImpl implements CustomersServices {
     }
 
     @Override
-    public Response insertCustomer(String customer) {
-        String mail=""; String firstName=""; String lastName=""; String password=""; String country=""; String adress=""; String zipcode=""; String state="";String city="";
+    public Response insertCustomer(String json) {
         try {
-            JSONObject jsonObject = new JSONObject(customer);
-            mail=jsonObject.getString("mail");
-            firstName=jsonObject.getString("fistName");
-            lastName=jsonObject.getString("lastName");
-            password=jsonObject.getString("password");
-            country=jsonObject.getString("country");
-            adress=jsonObject.getString("adress");
-            zipcode=jsonObject.getString("postal");
-            state=jsonObject.getString("state");
-            city=jsonObject.getString("city");
-            CustomerProvider.insertCustomer(mail,firstName,lastName,password,country,adress,zipcode,state,city);
-            return Response.ok().build();
-        } catch (JSONException e) {
+            Map customer = genson.deserialize(json,Map.class);
+            if (CustomerProvider.insertCustomer(customer)){
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+            }
+        } catch (Exception e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-
     }
+
+
+    @Override
+    public Response deleteCustomer(@PathParam("EncodedInfos") String EncodedInfos) {
+        try {
+            Map<String, String> customer = Cryptography.dechiffrementRSA(EncodedInfos);
+            if (CustomerProvider.deleteCustomer(customer.get("id"))){
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+    @Override
+    public Response updateCustomer(@PathParam("EncodedInfos") String EncodedInfos, String json) {
+        try {
+            Map<String, String> customerId = Cryptography.dechiffrementRSA(EncodedInfos);
+            Map customer = genson.deserialize(json,Map.class);
+            if (CustomerProvider.updateCustomer(customerId.get("id"), customer)){
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+
 }

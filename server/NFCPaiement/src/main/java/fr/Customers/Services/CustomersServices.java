@@ -13,10 +13,21 @@ public interface CustomersServices {
     @Path("/{EncodedInfos}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    Response CustomerInfo(String customer);
+    Response getCustomer(@PathParam("EncodedInfos") String customer);
+
+    @POST
+    @Path("/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    Response insertCustomer(String json);
+
+    @DELETE
+    @Path("/{EncodedInfos}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    Response deleteCustomer(@PathParam("EncodedInfos") String customer);
 
     @POST
     @Path("/{EncodedInfos}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response insertCustomer(String customer );
+    Response updateCustomer(@PathParam("EncodedInfos") String EncodedInfos, String json);
+
 }
