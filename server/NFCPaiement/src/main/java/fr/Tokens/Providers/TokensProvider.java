@@ -24,8 +24,7 @@ public class TokensProvider {
 
     public static boolean deleteToken (String token) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
-            db.query(String.format(DELETE_TOKEN, token));
-            return true;
+            return db.update(String.format(DELETE_TOKEN, token));
         }
         catch (Exception e)
         {
@@ -33,15 +32,18 @@ public class TokensProvider {
         }
     }
 
-    public static boolean insertToken(int customerId, int creditCardId, int somme, String token) throws Exception{
+    public static boolean insertToken(Map<String,String> token) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
-            db.query(String.format(INSERT_TOKEN, customerId, creditCardId, somme, token));
-            return true;
+            return db.update(String.format(INSERT_TOKEN, token.get("customerId"), token.get("creditCardId"), token.get("somme"), token.get("token")));
         }
         catch (Exception e)
         {
             return false;
         }
     }
+
+
+
+
 }
 
