@@ -5,11 +5,12 @@ import fr.CreditCards.Ressources.CreditCard;
 import fr.Customers.Providers.CustomerProvider;
 import fr.Customers.Ressources.Customer;
 import fr.Security.RSA.Cryptography;
-import fr.Tokens.Providers.PaiementProcess;
+import fr.Tokens.Providers.TokenProcess;
 import fr.Tokens.Providers.TokensProvider;
 import fr.Tokens.Ressources.Token;
 
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import java.util.Map;
 
@@ -19,27 +20,27 @@ import java.util.Map;
 @Path("/token")
 public class TokenServicesImpl implements TokenServices {
     @Override
-    public Response addToken(String EncodedInfos) {
+    public Response addPaiement(String EncodedJson) {
         try {
-            Map<String, String> json = Cryptography.dechiffrementRSA(EncodedInfos);
-            Token token = new Token(Integer.parseInt(json.get("creditCardId")),Integer.parseInt(json.get("customerId")),Integer.parseInt(json.get("somme")));
-            TokensProvider.insertToken(token.getCreditCardId(), token.getCustomerId(), token.getSomme(), token.getToken());
-            return Response.status(Response.Status.CREATED).entity(Cryptography.chiffrementRSA(token.getToken())).build();
+            Map<String, String> json = Cryptography.dechiffrementJsonRSA(EncodedJson);
+            String token = TokenProcess.generateToken();
+            json.put("token", token);
+            TokensProvider.insertToken(json);
+            return Response.status(Response.Status.CREATED).entity(Cryptography.chiffrementRSA(token)).build();
         } catch (Exception e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
 
     @Override
-    public Response getToken(String EncodedInfos) {
+    public Response getPaiement(@PathParam("EncodedInfos") String EncodedInfos) {
         try{
-            Map<String,String> json = Cryptography.dechiffrementRSA(EncodedInfos);
-            Map<String,String> resultToken = TokensProvider.findTokenById(json.get("token"));
-            Map<String,String> resultCreditCard = CreditCardProviders.findCreditCardById(Integer.parseInt(resultToken.get("creditCardId")), Integer.parseInt(resultToken.get("customerId")));
-            Map<String,String> resultCustomer = CustomerProvider.CustomerInfo(resultToken.get("customerId"));
-            CreditCard creditCard = new CreditCard(resultCreditCard.get("cardNumber"), Integer.parseInt(resultCreditCard.get("dateExpiration")), Integer.parseInt(resultCreditCard.get("cryptogram")), resultCreditCard.get("type"));
-            Customer customer = new Customer(resultCustomer.get("mail"), resultCustomer.get("firstName"), resultCustomer.get("lastName"), resultCustomer.get("city"), resultCustomer.get("country"), resultCustomer.get("address"), resultCustomer.get("postalCode"), resultCustomer.get("state"));
-            new PaiementProcess().initPaiement(creditCard, customer, Integer.parseInt(resultToken.get("somme")));
+            String tokenKey= Cryptography.dechiffrementPathRSA(EncodedInfos);
+            Token token = new Token(TokensProvider.findTokenById(tokenKey));
+            Customer customer = new Customer(CustomerProvider.findCustomerById(token.getCustomerId()));
+            CreditCard creditCard = new CreditCard(CreditCardProviders.findCreditCardById(token.getCreditCardId(), token.getCustomerId()));
+            TokenProcess paiementProcess = new TokenProcess();
+            paiementProcess.processPaiement(paiementProcess.initPaiement(creditCard, customer, token));
             return Response.ok().build();
         }catch (Exception e){
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -47,10 +48,10 @@ public class TokenServicesImpl implements TokenServices {
     }
 
     @Override
-    public Response deleteToken(String EncodedInfos) {
+    public Response deletePaiement(@PathParam("EncodedInfos") String EncodedInfos) {
         try{
-            Map<String,String> json = Cryptography.dechiffrementRSA(EncodedInfos);
-            TokensProvider.deleteToken(json.get("token"));
+            String tokenKey = Cryptography.dechiffrementPathRSA(EncodedInfos);
+            TokensProvider.deleteToken(tokenKey);
             return Response.ok().build();
         }catch (Exception e){
             return Response.status(Response.Status.NOT_FOUND).build();

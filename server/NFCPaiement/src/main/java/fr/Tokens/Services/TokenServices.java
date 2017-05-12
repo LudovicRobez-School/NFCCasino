@@ -9,18 +9,18 @@ import javax.ws.rs.core.Response;
  */
 public interface TokenServices {
 
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    Response addToken(String EncodedInfos);
-
-    @GET
-    @Path("/{EncodedInfos}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    Response getToken(@PathParam("EncodedInfos") String EncodedInfos);
-
     @POST
+    @Path("/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    Response addPaiement(String EncodedJson);
+
+    @GET
+    @Path("/{EncodedInfos}")
+    @Produces(MediaType.APPLICATION_JSON)
+    Response getPaiement(@PathParam("EncodedInfos") String EncodedInfos);
+
+    @DELETE
     @Path("/{EncodedInfos}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response deleteToken(@PathParam("EncodedInfos") String EncodedInfos);
+    Response deletePaiement(@PathParam("EncodedInfos") String EncodedInfos);
 }
