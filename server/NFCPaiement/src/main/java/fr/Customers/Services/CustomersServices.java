@@ -11,23 +11,31 @@ public interface CustomersServices {
 
     @GET
     @Path("/{EncodedInfos}")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    Response getCustomer(@PathParam("EncodedInfos") String customer);
+    Response getCustomer(@PathParam("EncodedInfos") String EncodedInfos);
 
     @POST
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response insertCustomer(String json);
+    Response insertCustomer(String EncodedJson);
 
     @DELETE
     @Path("/{EncodedInfos}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response deleteCustomer(@PathParam("EncodedInfos") String customer);
+    Response deleteCustomer(@PathParam("EncodedInfos") String EncodedInfos);
 
     @POST
     @Path("/{EncodedInfos}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response updateCustomer(@PathParam("EncodedInfos") String EncodedInfos, String json);
+    Response updateCustomer(@PathParam("EncodedInfos") String EncodedInfos, String EncodedJson);
 
+    @GET
+    @Path("/balance/{EncodedInfos}")
+    @Produces(MediaType.APPLICATION_JSON)
+    Response getBalance(@PathParam("EncodedInfos") String EncodedInfos);
+
+    @POST
+    @Path("/balance/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    Response updateBalance(String EncodedJson);
 }
