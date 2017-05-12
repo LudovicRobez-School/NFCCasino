@@ -1,8 +1,6 @@
 package fr.Customers.Services;
 
 
-import com.owlike.genson.Genson;
-import com.sun.prism.PhongMaterial;
 import fr.Customers.Providers.CustomerProvider;
 import fr.Security.RSA.Cryptography;
 
