@@ -49,8 +49,7 @@ public class CreditCardProvidersTest {
         creditCard.put("test", "test");
         expect(dbMock.findOneAsMap(anyString())).andReturn(creditCard);
         PowerMock.replayAll(dbMock);
-        Assert.assertEquals("should return the map", creditCard, CreditCardProviders.findCreditCardById(1,1));
-
+        Assert.assertEquals("should return the map", creditCard, CreditCardProviders.findCreditCardById(1,"test"));
         PowerMock.verifyAll();
     }
 
@@ -70,23 +69,29 @@ public class CreditCardProvidersTest {
 
         expect(dbMock.findAllAsMap(anyString())).andReturn(creditCards);
         PowerMock.replayAll(dbMock);
-        Assert.assertEquals("should return the list", creditCards, CreditCardProviders.getAllCreditCardsById(1));
+        Assert.assertEquals("should return the list", creditCards, CreditCardProviders.getAllCreditCardsById("test"));
         PowerMock.verifyAll();
     }
 
     @Test
     public void deleteCreditCard() throws Exception {
-        expect(dbMock.query(anyString()));
+        expect(dbMock.update(anyString())).andReturn(true);
         PowerMock.replayAll(dbMock);
-        Assert.assertTrue("should return true", CreditCardProviders.deleteCreditCard(1));
+        Assert.assertTrue("should return true",CreditCardProviders.deleteCreditCard(1));
         PowerMock.verifyAll();
     }
 
     @Test
     public void insertCreditCard() throws Exception {
-        expect(dbMock.query(anyString()));
+        Map<String, String> creditCard = new HashMap<String, String>();
+        creditCard.put("customerId","test");
+        creditCard.put("cardNumber","test");
+        creditCard.put("dateExpiration", "0000");
+        creditCard.put("cryptogram", "000");
+        creditCard.put("type", "test");
+        expect(dbMock.update(anyString())).andReturn(true);
         PowerMock.replayAll(dbMock);
-        Assert.assertTrue("should return true", CreditCardProviders.insertCreditCard(1,"test", 0000, 000, "VISA"));
+        Assert.assertTrue("should return true", CreditCardProviders.insertCreditCard(creditCard));
         PowerMock.verifyAll();
     }
 
