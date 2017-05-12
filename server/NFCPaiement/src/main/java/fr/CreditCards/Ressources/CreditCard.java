@@ -1,6 +1,7 @@
 package fr.CreditCards.Ressources;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by rl613611 on 07/02/2017.
@@ -12,11 +13,11 @@ public class CreditCard {
     private int cryptogram;
     private String type;
 
-    public CreditCard(String cardNumber, int dateExpiration, int cryptogram, String type) {
-        this.cardNumber = cardNumber;
-        this.dateExpiration = dateExpiration;
-        this.cryptogram = cryptogram;
-        this.type = type;
+    public CreditCard(Map<String,String> creditCard) {
+        this.cardNumber = creditCard.get("cardNumber");
+        this.dateExpiration = Integer.parseInt(creditCard.get("dateExpiration"));
+        this.cryptogram = Integer.parseInt(creditCard.get("cryptogram"));
+        this.type = creditCard.get("type");
     }
 
     public String getType() {
