@@ -9,6 +9,7 @@ import android.util.Log;
 public class MyHostApduService extends HostApduService {
 
 	private int messageCounter = 0;
+	String token = "TEST";
 
 	@Override
 	public byte[] processCommandApdu(byte[] apdu, Bundle extras) {
@@ -23,8 +24,7 @@ public class MyHostApduService extends HostApduService {
 	}
 
 	private byte[] getWelcomeMessage() {
-        //byte[] tabRep = {"Hello Desktop!".getBytes()[0], "Hello Desktop!".getBytes()[1], (byte)0x90, (byte)0x00};
-		byte[] tabRep = {"FDP".getBytes()[0], "FDP".getBytes()[1], "FDP".getBytes()[2], (byte)0x90, (byte)0x00};
+		byte[] tabRep = {token.getBytes()[0], token.getBytes()[1], token.getBytes()[2], token.getBytes()[3], (byte)0x90, (byte)0x00};
         return tabRep;
 	}
 

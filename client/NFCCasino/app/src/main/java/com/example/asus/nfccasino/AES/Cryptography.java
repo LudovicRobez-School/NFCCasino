@@ -14,7 +14,8 @@ import java.security.InvalidKeyException;
  */
 public class Cryptography {
 
-    private static String secretKey = "SecretKeyForNFCCasino";
+    //private static String secretKey = "SecretKeyForNFCCasino";
+    private static String secretKey = "SecretKeyForNFCC";
 
     /**
      * Methode chiffrement.
@@ -29,15 +30,15 @@ public class Cryptography {
             bytes = chiffreur.doFinal(message.getBytes());
             return bytes.toString();
         } catch (NoSuchAlgorithmException e) {
-            return null;
+            return e.toString();
         } catch (InvalidKeyException e) {
-            return null;
+            return e.toString();
         } catch (NoSuchPaddingException e) {
-            return null;
+            return e.toString();
         } catch (BadPaddingException e) {
-            return null;
+            return e.toString();
         } catch (IllegalBlockSizeException e) {
-            return null;
+            return e.toString();
         }
     }
 

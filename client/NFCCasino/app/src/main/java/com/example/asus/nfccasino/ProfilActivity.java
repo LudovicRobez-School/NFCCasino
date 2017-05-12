@@ -25,10 +25,10 @@ public class ProfilActivity extends AppCompatActivity {
 
         user = getIntent().getExtras().getParcelable("user");
 
-        user.initProfil(user);
+        user.cryptData();
 
         TextView txtLogin = (TextView) findViewById(R.id.txtLogin);
-        txtLogin.setText(user.getLogin());
+        txtLogin.setText(user.getEmail());
 
         Button nfc = (Button) findViewById(R.id.btnCredit);
         nfc.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton

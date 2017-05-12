@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
                 if (editLogin.getText().toString().equals("test") && editMdp.getText().toString().equals("test")){
+                    // if (user.checkCustomer(user, editLogin.getText().toString(), editMdp.getText().toString()) == true) {
                     user = new User(editLogin.getText().toString());
+                    //user.initProfil(user);
                     Intent intent = new Intent(MainActivity.this, ProfilActivity.class);  //Lancer l'activité
                     intent.putExtra("user", user); // Envoyer l'activité
                     startActivity(intent);    //Afficher la vue
@@ -47,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                 }
-                //Intent i = new Intent(getApplicationContext(), ProfilActivity.class);
-                //startActivity(i);
             }
         });
 
@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(MainActivity.this, InscriptionActivity.class);  //Lancer l'activité
                 startActivity(intent);    //Afficher la vue
-                //Intent i = new Intent(getApplicationContext(), InscriptionActivity.class);
-                //startActivity(i);
             }
         });
     }
