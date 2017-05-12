@@ -1,6 +1,7 @@
 package fr.Customers.Ressources;
 
 import java.util.Date;
+import java.util.Map;
 
 public class Customer {
 private String mail;
@@ -12,15 +13,15 @@ private String address;
 private String postalCode;
 private String state;
 
-	public Customer(String mail, String firstName, String lastName, String city, String country, String address, String postalCode, String state) {
-		this.mail = mail;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.city = city;
-		this.country = country;
-		this.address = address;
-		this.postalCode = postalCode;
-		this.state = state;
+	public Customer(Map<String, String> customer) {
+		this.mail = customer.get("mail");
+		this.firstName = customer.get("firstName");
+		this.lastName = customer.get("lastName");
+		this.city = customer.get("city");
+		this.country = customer.get("country");
+		this.address = customer.get("address");
+		this.postalCode = customer.get("postalCode");
+		this.state = customer.get("state");
 	}
 
 	public String getCity() {
@@ -71,7 +72,7 @@ private String state;
 	public void setFirstName(String fn){firstName=fn;}
 	public void setLastName(String ln){lastName=ln;}
 
-	
+	/*
 	public Object clone(){
 		return new Customer(mail, firstName, lastName, city, country, address, postalCode, state);
 	}
@@ -82,5 +83,6 @@ private String state;
 		if(this.ToString()==obj1.toString()) return true;
 		else return false;
 	}
+	*/
 
 }
