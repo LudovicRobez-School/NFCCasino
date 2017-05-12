@@ -32,16 +32,8 @@ public class Cryptography {
            chiffreur.init(Cipher.ENCRYPT_MODE, clePublique);
            bytes = chiffreur.doFinal(encodedCode.getBytes());
            return bytes.toString();
-       } catch (BadPaddingException e) {
+       } catch (Exception e) {
           return null;
-       } catch (IllegalBlockSizeException e) {
-           return null;
-       } catch (NoSuchPaddingException e) {
-           return null;
-       } catch (InvalidKeyException e) {
-           return null;
-       } catch (NoSuchAlgorithmException e) {
-           return null;
        }
    }
 
@@ -50,7 +42,24 @@ public class Cryptography {
     * @param encodedCode message à déchiffrer
     */
 
-    public static Map<String, String> dechiffrementRSA(String encodedCode) {
+    public static String dechiffrementPathRSA(String encodedCode) {
+
+        // Récupération de la clé privée
+        PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(privateKeyFile);
+
+        // Déchiffrement du message
+        byte[] bytes = encodedCode.getBytes();
+        try {
+            Cipher dechiffreur = Cipher.getInstance("RSA");
+            dechiffreur.init(Cipher.DECRYPT_MODE, clePrivee);
+            bytes = dechiffreur.doFinal(bytes);
+            return bytes.toString();
+        } catch(Exception e) {
+            return null;
+        }
+    }
+
+    public static Map<String, String> dechiffrementJsonRSA(String encodedCode) {
 
         // Récupération de la clé privée
         PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(privateKeyFile);
@@ -69,20 +78,9 @@ public class Cryptography {
                 mapJSON.put(key, obj.getString(key));
             }
             return mapJSON;
-        } catch(NoSuchAlgorithmException e) {
-            return null;
-        } catch(NoSuchPaddingException e) {
-            return null;
-        } catch(InvalidKeyException e) {
-            return null;
-        } catch(IllegalBlockSizeException e) {
-            return null;
-        } catch(BadPaddingException e) {
-            return null;
-        } catch (JSONException e) {
+        } catch(Exception e) {
             return null;
         }
-
     }
 
 }
