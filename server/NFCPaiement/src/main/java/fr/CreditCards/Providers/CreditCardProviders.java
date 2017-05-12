@@ -20,13 +20,13 @@ public class CreditCardProviders {
 
     private  final static  String INSERT_CREDITCARD = "DELETE FROM CreditCard WHERE creditCardId = %1$d";
 
-    public static Map<String, String> findCreditCardById(int creditCardId, int customerId) throws Exception{
+    public static Map<String, String> findCreditCardById(int creditCardId, String customerId) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
             return db.findOneAsMap(String.format(CREDITCARD_QUERY, creditCardId, customerId));
         }
     }
 
-    public static ArrayList<Map<String, String>> getAllCreditCardsById(int customerId) throws Exception {
+    public static ArrayList<Map<String, String>> getAllCreditCardsById(String customerId) throws Exception {
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
             return db.findAllAsMap(String.format(CREDITCARDS_QUERY,customerId));
         }
@@ -34,8 +34,7 @@ public class CreditCardProviders {
 
     public static boolean deleteCreditCard (int creditCardId) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
-            db.query(String.format(DELETE_CREDITCARD, creditCardId));
-            return true;
+            return db.update(String.format(DELETE_CREDITCARD, creditCardId));
         }
         catch (Exception e)
         {
@@ -43,10 +42,9 @@ public class CreditCardProviders {
         }
     }
 
-    public static boolean insertCreditCard(int customerId, String cardNumber, int dateExpiration, int cryptogram, String type) throws Exception{
+    public static boolean insertCreditCard(Map<String, String> creditCard) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
-            db.query(String.format(INSERT_CREDITCARD, customerId, cardNumber, dateExpiration, cryptogram, type));
-            return true;
+            return db.update(String.format(INSERT_CREDITCARD, Integer.parseInt(creditCard.get("customerId")), creditCard.get("cardNumber"), Integer.parseInt(creditCard.get("dateExpiration")), Integer.parseInt(creditCard.get("cryptogram")), creditCard.get("type")));
         }
         catch (Exception e)
         {
