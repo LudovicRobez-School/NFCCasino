@@ -4,7 +4,6 @@ import fr.Data.Services.DataBaseAccess;
 import fr.Data.Services.DataBaseAccessImpl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -12,11 +11,11 @@ import java.util.Map;
  */
 public class CreditCardProviders {
 
-    private final static String CREDITCARD_QUERY = "SELECT * FROM CreditCard WHERE creditCardId = %1$d AND customerId = %2$d";
+    private final static String CREDITCARD_QUERY = "SELECT * FROM CreditCard WHERE creditCardId = %1$d AND customerId = %2$s";
 
-    private final static String CREDITCARDS_QUERY = "SELECT * FROM CreditCard WHERE customerId = %1$d";
+    private final static String CREDITCARDS_QUERY = "SELECT * FROM CreditCard WHERE customerId = %1$s";
 
-    private final static String DELETE_CREDITCARD = "INSERT INTO CreditCard (customerId, cardNumber, dateExpiration, cryptogram, type) VALUES ( %1$d, %2$s, %3$s, %4$d, %5$s)";
+    private final static String DELETE_CREDITCARD = "INSERT INTO CreditCard (customerId, cardNumber, dateExpiration, cryptogram, type) VALUES ( %1$s, %2$s, %3$s, %4$d, %5$s)";
 
     private  final static  String INSERT_CREDITCARD = "DELETE FROM CreditCard WHERE creditCardId = %1$d";
 
@@ -44,7 +43,7 @@ public class CreditCardProviders {
 
     public static boolean insertCreditCard(Map<String, String> creditCard) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {
-            return db.update(String.format(INSERT_CREDITCARD, Integer.parseInt(creditCard.get("customerId")), creditCard.get("cardNumber"), Integer.parseInt(creditCard.get("dateExpiration")), Integer.parseInt(creditCard.get("cryptogram")), creditCard.get("type")));
+            return db.update(String.format(INSERT_CREDITCARD, creditCard.get("customerId"), creditCard.get("cardNumber"), Integer.parseInt(creditCard.get("dateExpiration")), Integer.parseInt(creditCard.get("cryptogram")), creditCard.get("type")));
         }
         catch (Exception e)
         {
