@@ -90,12 +90,21 @@ public class CustomersServicesImplTest {
     @Test
     public void getBalance() throws Exception {
         PowerMock.mockStatic(CustomerProvider.class);
-        
+        expect(CustomerProvider.findBanlanceById(anyString()) ).andReturn(new HashMap<String, String>());
+        Response output = client.target("http://localhost:8080/nfcpaiement/customer/balance/" + Cryptography.chiffrementRSA("test")).request().get();
+
+        Assert.assertEquals("should return status 202", 202, output.getStatus());
+        TestCase.assertNotNull("Should return Map", output.getEntity());
     }
 
     @Test
     public void updateBalance() throws Exception {
         PowerMock.mockStatic(CustomerProvider.class);
+        expect(CustomerProvider.updateBalance((Map<String, String>) anyObject()) ).andReturn(true);
+        JSONObject json = new JSONObject(new HashMap<String, String>());
+        Response output = client.target("http://localhost:8080/nfcpaiement/customer/balance").request().post(Entity.entity(MediaType.APPLICATION_JSON_TYPE,json.toString()));
+
+        Assert.assertEquals("should return status 202", 202, output.getStatus());
     }
 
 }
