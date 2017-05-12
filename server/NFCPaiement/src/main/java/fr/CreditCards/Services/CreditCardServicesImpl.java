@@ -23,8 +23,8 @@ public class CreditCardServicesImpl implements CreditCardServices{
     @Override
     public Response getAllCreditCards(@PathParam("EncodedInfos") String EncodedInfos) {
         try{
-            Map<String,String> json = Cryptography.dechiffrementRSA(EncodedInfos);
-            ArrayList<Map<String, String>> allCreditCard = CreditCardProviders.getAllCreditCardsById(Integer.getInteger(json.get("customerId")));
+            String customerId = Cryptography.dechiffrementPathRSA(EncodedInfos);
+            ArrayList<Map<String, String>> allCreditCard = CreditCardProviders.getAllCreditCardsById(customerId);
             JSONArray jsonAllCreditCard = new JSONArray(allCreditCard);
             return Response.ok(Cryptography.chiffrementRSA(jsonAllCreditCard.toString())).build();
         }catch (Exception e){
@@ -35,9 +35,8 @@ public class CreditCardServicesImpl implements CreditCardServices{
     @Override
     public Response addCreditCard(String EncodedInfos) {
         try {
-            Map<String, String> json = Cryptography.dechiffrementRSA(EncodedInfos);
-            CreditCardProviders.insertCreditCard(Integer.parseInt(json.get("customerId")), json.get("cardNumber"), Integer.parseInt(json.get("dateExpiration")), Integer.parseInt(json.get("cryptogram")), json.get("type"));
-            //CreditCardProviders.insertCreditCard(Integer.parseInt(json.get("customerId")), json.get("cardNumber"),Integer.parseInt(json.get("dateExpiration"))), Integer.parseInt(json.get("cryptogram")), json.get("");
+            Map<String, String> creditCard = Cryptography.dechiffrementJsonRSA(EncodedInfos);
+            CreditCardProviders.insertCreditCard(creditCard);
             return Response.status(Response.Status.CREATED).build();
         } catch (Exception e) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -47,8 +46,8 @@ public class CreditCardServicesImpl implements CreditCardServices{
     @Override
     public Response getCreditCard(String EncodedInfos) {
         try{
-            Map<String,String> json = Cryptography.dechiffrementRSA(EncodedInfos);
-            Map<String, String> creditCard = CreditCardProviders.findCreditCardById(Integer.parseInt(json.get("creditCardId")), Integer.parseInt(json.get("customerId")));
+            Map<String,String> json = Cryptography.dechiffrementJsonRSA(EncodedInfos);
+            Map<String, String> creditCard = CreditCardProviders.findCreditCardById(Integer.parseInt(json.get("creditCardId")), json.get("customerId"));
             JSONObject jsonCreditCard = new JSONObject(creditCard);
             return Response.ok(Cryptography.chiffrementRSA(jsonCreditCard.toString())).build();
         }catch (Exception e){
@@ -59,7 +58,7 @@ public class CreditCardServicesImpl implements CreditCardServices{
     @Override
     public Response deleteCreditCard(String EncodedInfos) {
         try{
-            Map<String,String> json = Cryptography.dechiffrementRSA(EncodedInfos);
+            Map<String,String> json = Cryptography.dechiffrementJsonRSA(EncodedInfos);
             CreditCardProviders.deleteCreditCard(Integer.parseInt(json.get("creditCardId")));
             return Response.ok().build();
         }catch (Exception e){
