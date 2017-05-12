@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 @Path("/security")
 public class SecurityServicesImpl implements SecurityServices {
 
-   private static final String publicKeyFile = "C:\\Users\\Greg\\Desktop\\test\\publickey.txt";
+   private static final String publicKeyFile = "";
 
     @Override
     public Response getPublicKey() {
