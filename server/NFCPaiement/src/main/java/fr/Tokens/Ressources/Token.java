@@ -1,5 +1,6 @@
 package fr.Tokens.Ressources;
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -9,7 +10,7 @@ public class Token {
 
     String token;
     int creditCardId;
-    int customerId;
+    String customerId;
     int somme;
 
 
@@ -29,11 +30,11 @@ public class Token {
         this.creditCardId = creditCardId;
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
@@ -45,10 +46,10 @@ public class Token {
         this.somme = somme;
     }
 
-    public Token(int creditCardId, int customerId, int somme) {
-        this.token = UUID.randomUUID().toString();
-        this.creditCardId = creditCardId;
-        this.customerId = customerId;
-        this.somme = somme;
+    public Token(Map<String,String> token) {
+        this.token = token.get("token");
+        this.creditCardId = Integer.parseInt(token.get("creditCardId"));
+        this.customerId = token.get("customerId");
+        this.somme = Integer.parseInt(token.get("somme"));
     }
 }
