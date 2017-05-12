@@ -13,7 +13,7 @@ import org.codehaus.jettison.json.JSONObject;
 import java.util.*;
 
 /**
- * Created by ludov on 20/02/2017.
+ * update by ludov on 20/02/2017.
  * Source: http://www.cyril-rabat.fr/articles/index.php?article=53
  */
 public class Cryptography {
