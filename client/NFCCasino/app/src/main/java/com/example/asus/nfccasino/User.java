@@ -143,8 +143,8 @@ class User implements Parcelable {
     public String getInfo(String login) {
         String urlCrypt = "";
         Cryptography crypt = new Cryptography();
-        crypt.chiffrementAES("security");
-        String URL  = "http://localhost:8080/" + urlCrypt + login;
+        urlCrypt = crypt.chiffrementAES("security");
+        String URL  = "http://192.168.0.31:8080/" + "security";//urlCrypt; //+ login;
         Http requete = new Http();
         requete.execute("GET",URL,"");
         String result ="";
@@ -155,6 +155,7 @@ class User implements Parcelable {
             Log.i("error", e.toString());
         }
         if(!result.equals("")) {
+            Log.i("Public key",result);
             return result;
         } else {
             return "Erreur de récupération des informations";

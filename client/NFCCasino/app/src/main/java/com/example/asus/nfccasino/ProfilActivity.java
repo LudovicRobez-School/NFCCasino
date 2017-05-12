@@ -25,6 +25,8 @@ public class ProfilActivity extends AppCompatActivity {
 
         user = getIntent().getExtras().getParcelable("user");
 
+        user.initProfil(user);
+
         TextView txtLogin = (TextView) findViewById(R.id.txtLogin);
         txtLogin.setText(user.getLogin());
 
