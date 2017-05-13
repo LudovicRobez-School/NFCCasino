@@ -1,6 +1,5 @@
 package fr.Customers.Providers;
 
-import fr.CreditCards.Providers.CreditCardProviders;
 import fr.Data.Services.DataBaseAccess;
 import fr.Data.Services.DataBaseAccessImpl;
 import org.glassfish.jersey.server.ResourceConfig;
