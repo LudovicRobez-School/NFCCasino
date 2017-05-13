@@ -1,16 +1,13 @@
 package fr.Security.RSA;
 
-import javax.crypto.BadPaddingException;
+import org.codehaus.jettison.json.JSONObject;
+
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by ludov on 20/02/2017.
@@ -18,12 +15,11 @@ import java.util.*;
  */
 public class Cryptography {
 
-    private static final String privateKeyFile = "";
-    private static final String publicKeyFile = "";
+
 
    public static String chiffrementRSA (String encodedCode) {
        //Recuperation de la cle publique
-       PublicKey clePublique = RSAKeyManagement.lectureClePublique(publicKeyFile);
+       PublicKey clePublique = RSAKeyManagement.lectureClePublique(RSAKeyManagement.publicKeyFile);
 
        // Chiffrement du message
        byte[] bytes = null;
@@ -45,7 +41,7 @@ public class Cryptography {
     public static String dechiffrementPathRSA(String encodedCode) {
 
         // Récupération de la clé privée
-        PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(privateKeyFile);
+        PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(RSAKeyManagement.privateKeyFile);
 
         // Déchiffrement du message
         byte[] bytes = encodedCode.getBytes();
@@ -62,7 +58,7 @@ public class Cryptography {
     public static Map<String, String> dechiffrementJsonRSA(String encodedCode) {
 
         // Récupération de la clé privée
-        PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(privateKeyFile);
+        PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(RSAKeyManagement.privateKeyFile);
 
         // Déchiffrement du message
         byte[] bytes = encodedCode.getBytes();
