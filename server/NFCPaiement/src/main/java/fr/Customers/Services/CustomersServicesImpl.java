@@ -83,6 +83,4 @@ public class CustomersServicesImpl implements CustomersServices {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
-
-
 }
