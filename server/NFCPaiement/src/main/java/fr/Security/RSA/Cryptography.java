@@ -18,8 +18,8 @@ import java.util.*;
  */
 public class Cryptography {
 
-    private static final String privateKeyFile = "";
-    private static final String publicKeyFile = "";
+    private static final String privateKeyFile = "C:\\NFCCASINO\\clePrivee.txt";
+    private static final String publicKeyFile = "C:\\NFCCASINO\\clePublique.txt";
 
    public static String chiffrementRSA (String encodedCode) {
        //Recuperation de la cle publique

@@ -14,7 +14,7 @@ import java.security.InvalidKeyException;
  */
 public class Cryptography {
 
-    private static String secretKey = "SecretKeyForNFCCasino";
+    private static String secretKey = "SecretKeyForNFCC";
 
     /**
      * Methode chiffrement.
