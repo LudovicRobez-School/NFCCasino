@@ -16,6 +16,8 @@ import java.security.spec.RSAPublicKeySpec;
  */
 public class RSAKeyManagement {
 
+    public static final String privateKeyFile = "";
+    public static final String publicKeyFile = "";
     /**
      * Sauvegarde de la clé publique dans un fichier.
      * @param clePublique la clé publique

@@ -13,13 +13,12 @@ import javax.ws.rs.core.Response;
 @Path("/security")
 public class SecurityServicesImpl implements SecurityServices {
 
-   private static final String publicKeyFile = "";
 
     @Override
     public Response getPublicKey() {
         try {
-            RSAKeyGenerator.GeneratingKeys("","");
-            String encodedPublicKey = Cryptography.chiffrementAES(RSAKeyManagement.lectureClePublique(publicKeyFile).toString());
+            RSAKeyGenerator.GeneratingKeys(RSAKeyManagement.privateKeyFile,RSAKeyManagement.publicKeyFile);
+            String encodedPublicKey = Cryptography.chiffrementAES(RSAKeyManagement.lectureClePublique(RSAKeyManagement.publicKeyFile).toString());
             return Response.ok(encodedPublicKey).build();
         }catch (Exception e){
             return Response.status(204).build();
