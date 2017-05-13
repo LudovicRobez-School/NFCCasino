@@ -7,10 +7,14 @@ import android.view.View;
 import android.widget.Button;
 
 /**
- * Created by Asus on 21/02/2017.
+ * @author Gregory Vesic
+ * @version 21/02/2017
  */
-
 public class InscriptionActivity extends AppCompatActivity {
+    /**
+     * Méthode onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +23,6 @@ public class InscriptionActivity extends AppCompatActivity {
         /*
          *  Evenements lors du clic sur les différents boutons
          */
-
         Button btnValider = (Button) findViewById(R.id.btnAdd);   //Appel du Bouton
         btnValider.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
@@ -28,9 +31,6 @@ public class InscriptionActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(InscriptionActivity.this, MainActivity.class);  //Lancer l'activité
                 startActivity(intent);    //Afficher la vue
-
-                //Intent i = new Intent(getApplicationContext(), ProfilActivity.class);
-                //startActivity(i);
             }
         });
 
@@ -42,8 +42,6 @@ public class InscriptionActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(InscriptionActivity.this, MainActivity.class);  //Lancer l'activité
                 startActivity(intent);    //Afficher la vue
-                //Intent i = new Intent(getApplicationContext(), InscriptionActivity.class);
-                //startActivity(i);
             }
         });
     }

@@ -19,9 +19,9 @@ import android.widget.TextView;
 import java.io.UnsupportedEncodingException;
 
 /**
- * Created by Asus on 28/03/2017.
+ * @author Gregory Vesic
+ * @version 28/03/2017
  */
-
 public class LectureNFCActivity extends AppCompatActivity {
     // Profil
     User user;
@@ -33,6 +33,10 @@ public class LectureNFCActivity extends AppCompatActivity {
     //Autre
     TextView resultat;
 
+    /**
+     * Méthode onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,17 +65,26 @@ public class LectureNFCActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Méthode onResume
+     */
     public void onResume() {
         super.onResume();
         nfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFiltersArray, null);
     }
 
-
+    /**
+     * Méthode onPause
+     */
     public void onPause() {
         super.onPause();
         nfcAdapter.disableForegroundDispatch(this);
     }
 
+    /**
+     * Méthode onNewIntent
+     * @param intent
+     */
     public void onNewIntent(Intent intent) {
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action) || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action) || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
@@ -79,6 +92,11 @@ public class LectureNFCActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Méthode getTextData
+     * @param payload
+     * @return
+     */
     String getTextData(byte[] payload) {
         String texteCode = ((payload[0] & 0200) == 0) ? "UTF-8" : "UTF-16";
         int langageCodeTaille = payload[0] & 0077;
@@ -92,6 +110,10 @@ public class LectureNFCActivity extends AppCompatActivity {
         return "";
     }
 
+    /**
+     * Méthode resolveIntent
+     * @param intent
+     */
     public void resolveIntent(Intent intent) {
 
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);

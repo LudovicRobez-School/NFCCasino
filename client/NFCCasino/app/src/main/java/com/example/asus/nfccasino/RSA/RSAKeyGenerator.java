@@ -42,6 +42,10 @@ public class RSAKeyGenerator {
         }
     }
 
+    /**
+     * Méthode permettant de remettre à 0 un fichier
+     * @param filePath
+     */
     public static void RefreshFile(String filePath) {
         try {
             File fichier = new File("filePath");

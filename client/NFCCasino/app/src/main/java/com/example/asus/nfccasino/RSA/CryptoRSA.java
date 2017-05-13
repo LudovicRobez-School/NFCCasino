@@ -24,6 +24,11 @@ public class CryptoRSA {
     //private static final String publicKeyFile = "SecretKeyForNFCC";
     private static final String publicKeyFile = "test.txt"; // voir writeToFile() - MainActivity.java
 
+    /**
+     * Méthode de chiffrement RSA
+     * @param encodedCode
+     * @return
+     */
    public static String chiffrementRSA (String encodedCode) {
        //Recuperation de la cle publique
        PublicKey clePublique = RSAKeyManagement.lectureClePublique(publicKeyFile);
