@@ -8,7 +8,7 @@ import android.widget.Button;
 
 /**
  * @author Gregory Vesic
- * @version 20/04/2017
+ * @version 21/02/2017
  */
 public class InscriptionActivity extends AppCompatActivity {
     /**
@@ -23,7 +23,6 @@ public class InscriptionActivity extends AppCompatActivity {
         /*
          *  Evenements lors du clic sur les différents boutons
          */
-
         Button btnValider = (Button) findViewById(R.id.btnAdd);   //Appel du Bouton
         btnValider.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
@@ -32,9 +31,6 @@ public class InscriptionActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(InscriptionActivity.this, MainActivity.class);  //Lancer l'activité
                 startActivity(intent);    //Afficher la vue
-
-                //Intent i = new Intent(getApplicationContext(), ProfilActivity.class);
-                //startActivity(i);
             }
         });
 
@@ -46,8 +42,6 @@ public class InscriptionActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(InscriptionActivity.this, MainActivity.class);  //Lancer l'activité
                 startActivity(intent);    //Afficher la vue
-                //Intent i = new Intent(getApplicationContext(), InscriptionActivity.class);
-                //startActivity(i);
             }
         });
     }

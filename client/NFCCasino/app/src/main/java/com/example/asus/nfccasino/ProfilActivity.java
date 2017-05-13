@@ -11,7 +11,6 @@ import android.widget.TextView;
  * @author Gregory Vesic
  * @version 21/02/2017
  */
-
 public class ProfilActivity extends AppCompatActivity {
     User user;
 
