@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.asus.nfccasino.AES.Cryptography;
+import com.example.asus.nfccasino.RSA.CryptoRSA;
 
 class User implements Parcelable {
 
@@ -24,7 +25,7 @@ class User implements Parcelable {
 
     private String token; // plus tard
 
-    private String urlServer= "http://192.168.0.31:8080/"; // a modifié selon le poste server
+    private static String urlServer= "http://192.168.0.31:8080/"; // a modifié selon le poste server
 
     User() {};
     User(String email) {
@@ -145,10 +146,10 @@ class User implements Parcelable {
         }
     }
 
-    public String getCustomer(String email) {
+    public static String getCustomer(String email) {
         String urlCrypt = "";
-        urlCrypt = Cryptography.chiffrementAES("security");
-        String URL  = urlServer + "security/" + urlCrypt;
+        urlCrypt = CryptoRSA.chiffrementRSA(email);
+        String URL  = urlServer + "customer/" + urlCrypt;
 
         Http requete = new Http();
         requete.execute("GET",URL,"");
@@ -167,14 +168,16 @@ class User implements Parcelable {
         }
     }
 
-    public boolean checkCustomer(User user, String email, String password) {
+    public static boolean checkCustomer(User user, String email, String password) {
         if(!user.getCustomer(user.getEmail()).equals("")&&!user.getCustomer(user.getEmail()).equals("-1")) {
             try {
                 JSONObject jsonProfil = new JSONObject(getCustomer(user.getEmail()));
 
                 if (email == jsonProfil.getString("mail") && password == jsonProfil.getString("password")) {
+                    Log.i("check", "ok");
                     return true;//"Authenfication réussie !";
                 } else {
+                    Log.i("check", "no");
                     return false;//"Authentification échouée !";
                 }
             } catch (JSONException e) {
@@ -182,6 +185,7 @@ class User implements Parcelable {
                 return false;//"Erreur d'authentification !";
             }
         } else {
+            Log.i("check", "error");
             return false;//"Email invalide !";
         }
     }

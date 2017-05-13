@@ -20,7 +20,7 @@ public class InscriptionActivity extends AppCompatActivity {
          *  Evenements lors du clic sur les différents boutons
          */
 
-        Button btnValider = (Button) findViewById(R.id.btnValider);   //Appel du Bouton
+        Button btnValider = (Button) findViewById(R.id.btnAdd);   //Appel du Bouton
         btnValider.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
             @Override

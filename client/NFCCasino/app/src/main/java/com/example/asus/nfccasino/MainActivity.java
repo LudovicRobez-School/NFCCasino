@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 public class MainActivity extends AppCompatActivity {
     User user;
 
@@ -21,16 +24,22 @@ public class MainActivity extends AppCompatActivity {
         /*
          *  Evenements lors du clic sur les différents boutons
          */
+
+        Context context = getApplicationContext();
+        writeToFile("SecretKeyForNFCC", context);
+
         final EditText editLogin = (EditText) findViewById(R.id.editLogin);
         final EditText editMdp = (EditText) findViewById(R.id.editMdp);
+
         Button btnConnexion = (Button) findViewById(R.id.btnConnexion);   //Appel du Bouton
         btnConnexion.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
             @Override
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
+                user = new User(editLogin.getText().toString());
                 if (editLogin.getText().toString().equals("test") && editMdp.getText().toString().equals("test")){
-                    // if (user.checkCustomer(user, editLogin.getText().toString(), editMdp.getText().toString()) == true) {
+                //if (User.checkCustomer(user, editLogin.getText().toString(), editMdp.getText().toString()) == true) {
                     user = new User(editLogin.getText().toString());
                     //user.initProfil(user);
                     Intent intent = new Intent(MainActivity.this, ProfilActivity.class);  //Lancer l'activité
@@ -62,5 +71,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);    //Afficher la vue
             }
         });
+    }
+
+    private void writeToFile(String data,Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("test.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+            Log.i("writeToFile", "ok");
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 }

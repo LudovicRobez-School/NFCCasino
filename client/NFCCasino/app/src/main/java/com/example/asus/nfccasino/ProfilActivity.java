@@ -1,14 +1,10 @@
 package com.example.asus.nfccasino;
 
 import android.content.Intent;
-import android.nfc.NdefMessage;
-import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -27,30 +23,44 @@ public class ProfilActivity extends AppCompatActivity {
 
         user.cryptData();
 
-        TextView txtLogin = (TextView) findViewById(R.id.txtLogin);
-        txtLogin.setText(user.getEmail());
+        TextView txtLogin = (TextView) findViewById(R.id.txtFirstname);
+        //txtLogin.setText(user.getEmail());
 
-        Button nfc = (Button) findViewById(R.id.btnCredit);
-        nfc.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
+        Button btnCredit = (Button) findViewById(R.id.btnCredit);
+        btnCredit.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
             @Override
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
-                Intent intent = new Intent(ProfilActivity.this, NFCActivity.class);  //Lancer l'activité
-                startActivity(intent);    //Afficher la vue
+                Intent intent = new Intent(ProfilActivity.this, CreditActivity.class);  //Lancer l'activité
                 intent.putExtra("user", user); // Envoyer l'activité
+                startActivity(intent);    //Afficher la vue
                 finish();
             }
 
         });
 
-        Button lecture = (Button) findViewById(R.id.btnLecture);
-        lecture.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
+        Button btnAddCard = (Button) findViewById(R.id.btnAddCard);
+        btnAddCard.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
             @Override
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
-                Intent intent = new Intent(ProfilActivity.this, LectureNFCActivity.class);  //Lancer l'activité
+                Intent intent = new Intent(ProfilActivity.this, AddCardActivity.class);  //Lancer l'activité
+                intent.putExtra("user", user); // Envoyer l'activité
+                startActivity(intent);    //Afficher la vue
+                finish();
+            }
+
+        });
+
+        Button btnDelCard = (Button) findViewById(R.id.btnDelCard);
+        btnDelCard.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
+        {
+            @Override
+            public void onClick(View activity_main)    //Au clic sur le bouton
+            {
+                Intent intent = new Intent(ProfilActivity.this, DelCardActivity.class);  //Lancer l'activité
                 intent.putExtra("user", user); // Envoyer l'activité
                 startActivity(intent);    //Afficher la vue
                 finish();
