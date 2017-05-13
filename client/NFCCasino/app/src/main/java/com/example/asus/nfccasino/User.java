@@ -10,6 +10,10 @@ import org.json.JSONObject;
 import com.example.asus.nfccasino.AES.Cryptography;
 import com.example.asus.nfccasino.RSA.CryptoRSA;
 
+/**
+ * @author Gregory Vesic
+ * @version 20/04/2017
+ */
 class User implements Parcelable {
 
     private String email;
@@ -27,59 +31,175 @@ class User implements Parcelable {
 
     private static String urlServer= "http://192.168.0.31:8080/"; // a modifié selon le poste server
 
+    /**
+     * Constructeur User
+     */
     User() {};
+
+    /**
+     * Constructeur User
+     * @param email
+     */
     User(String email) {
         this.email = email;
     }
 
-
+    /**
+     * Méthode getEmail
+     * @return
+     */
     public String getEmail(){
         return email;
     }
+
+    /**
+     * Méthode setEmail
+     * @param email
+     */
     public void setEmail(String email){
         this.email=email;
     }
 
+    /**
+     * Méthode getFirstname
+     * @return
+     */
     public String getFirstname(){
         return firstname;
     }
+
+    /**
+     * Méthode setFirstname
+     * @param firstname
+     */
     public void setFirstname(String firstname){
         this.firstname=firstname;
     }
 
+    /**
+     * Méthode getPassword
+     * @return
+     */
     public String getPassword() {return password;}
+
+    /**
+     * Méthode setPassword
+     * @param password
+     */
     public void setPassword(String password) {this.password = password;}
 
+    /**
+     * Méthode getLastname
+     * @return
+     */
     public String getLastname() {return lastname;}
+
+    /**
+     * Méthode setLastname
+     * @param lastname
+     */
     public void setLastname(String lastname) {this.lastname = lastname;}
 
+    /**
+     * Méthode getAddress
+     * @return
+     */
     public String getAddress() {return address;}
+
+    /**
+     * Méthode setAddress
+     * @param address
+     */
     public void setAddress(String address) {this.address = address;}
 
+    /**
+     * Méthode getZipCode
+     * @return
+     */
     public String getZipcode() {return zipcode;}
+
+    /**
+     * Méthode setZipcode
+     * @param zipcode
+     */
     public void setZipcode(String zipcode) {this.zipcode = zipcode;}
 
+    /**
+     * Méthode getCity
+     * @return
+     */
     public String getCity() {return city;}
+
+    /**
+     *  Méthode setCity
+     * @param city
+     */
     public void setCity(String city) {this.city = city;}
 
+    /**
+     * Méthode getState
+     * @return
+     */
     public String getState() {return state;}
+
+    /**
+     * Méthode setState
+     * @param state
+     */
     public void setState(String state) {this.state = state;}
 
+    /**
+     * Méthode getCountry
+     * @return
+     */
     public String getCountry() {return country;}
+
+    /**
+     * Méthode setCountry
+     * @param country
+     */
     public void setCountry(String country) {this.country = country;}
 
+    /**
+     * Méthode getBalance
+     * @return
+     */
     public double getBalance() {return balance;}
+
+    /**
+     * Méthode setBalance
+     * @param balance
+     */
     public void setBalance(double balance) {this.balance = balance;}
 
+    /**
+     * Méthode getToken
+     * @return
+     */
     public String getToken(){
         return token;
     }
 
+    /**
+     * Méthode setToken
+     * @param token
+     */
+    public void setToken(String token) {this.token = token;}
+
+    /**
+     * Méthode describeContents
+     * @return
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * Méthode writeToParcel
+     * @param out
+     * @param flags
+     */
     @Override
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(email);
@@ -95,17 +215,36 @@ class User implements Parcelable {
         out.writeString(token);
     }
 
+    /**
+     * Instance CREATOR de Parcelable.Creator
+     * Type User
+     */
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        /**
+         * Méthode createFromParcel
+         * @param in
+         * @return
+         */
         @Override
         public User createFromParcel(Parcel in) {
             return new User(in);
         }
+
+        /**
+         * Méthode newArray
+         * @param size
+         * @return
+         */
         @Override
         public User[] newArray(int size) {
             return new User[size];
         }
     };
 
+    /**
+     * Constructeur User
+     * @param in
+     */
     private User(Parcel in) {
         this.email = in.readString();
         this.password = in.readString();
@@ -121,12 +260,19 @@ class User implements Parcelable {
     }
 
     /*** TEST ***/
+    /**
+     * Méthode cryptData
+     */
     public void cryptData() {
         String urlCrypt = "";
         urlCrypt = Cryptography.chiffrementAES("security");
         Log.i("security", urlCrypt);
     }
 
+    /**
+     * Méthode getPublicKey
+     * @return
+     */
     public boolean getPublicKey() {
         String URL  = urlServer + "security";
 
@@ -146,6 +292,11 @@ class User implements Parcelable {
         }
     }
 
+    /**
+     * Méthode getCustomer
+     * @param email
+     * @return
+     */
     public static String getCustomer(String email) {
         String urlCrypt = "";
         urlCrypt = CryptoRSA.chiffrementRSA(email);
@@ -168,6 +319,13 @@ class User implements Parcelable {
         }
     }
 
+    /**
+     * Méthode checkCustomer
+     * @param user
+     * @param email
+     * @param password
+     * @return
+     */
     public static boolean checkCustomer(User user, String email, String password) {
         if(!user.getCustomer(user.getEmail()).equals("")&&!user.getCustomer(user.getEmail()).equals("-1")) {
             try {
@@ -190,6 +348,10 @@ class User implements Parcelable {
         }
     }
 
+    /**
+     * Méthode initProfil
+     * @param user
+     */
     public void initProfil(User user) {
         if(!user.getCustomer(user.getEmail()).equals("")&&!user.getCustomer(user.getEmail()).equals("-1")) {
             try {

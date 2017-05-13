@@ -7,10 +7,14 @@ import android.view.View;
 import android.widget.Button;
 
 /**
- * Created by Asus on 21/02/2017.
+ * @author Gregory Vesic
+ * @version 20/04/2017
  */
-
 public class InscriptionActivity extends AppCompatActivity {
+    /**
+     * Méthode onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

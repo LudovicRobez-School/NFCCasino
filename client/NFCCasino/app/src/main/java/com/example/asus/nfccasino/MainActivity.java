@@ -13,9 +13,17 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+/**
+ * @author Gregory Vesic
+ * @version 21/02/2017
+ */
 public class MainActivity extends AppCompatActivity {
     User user;
 
+    /**
+     * Méthode onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

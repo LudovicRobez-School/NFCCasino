@@ -8,14 +8,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * Created by Asus on 21/02/2017.
+ * @author Gregory Vesic
+ * @version 21/02/2017
  */
 
 public class ProfilActivity extends AppCompatActivity {
     User user;
 
+    /**
+     * Méthode onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 

@@ -10,10 +10,19 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
+/**
+ * @author Gregory Vesic
+ * @version 20/04/2017
+ */
 class Http extends AsyncTask<String, Integer, String> {
 
     private static final MediaType JSON = MediaType.parse("application/x-www-form-urlencoded");
 
+    /**
+     * Méthode doInBackground
+     * @param arg0
+     * @return
+     */
     @Override
     protected String doInBackground(String... arg0) {
         String result;
@@ -49,6 +58,13 @@ class Http extends AsyncTask<String, Integer, String> {
         }
     }
 
+    /**
+     * Méthode post
+     * @param url
+     * @param params
+     * @return
+     * @throws IOException
+     */
     private String post(String url,String params) throws IOException {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON,params);
@@ -65,6 +81,13 @@ class Http extends AsyncTask<String, Integer, String> {
         }
     }
 
+    /**
+     * Méthode get
+     * @param url
+     * @param params
+     * @return
+     * @throws IOException
+     */
     private String get(String url,String params) throws IOException {
         if(params.equals("")) {
             OkHttpClient client = new OkHttpClient();

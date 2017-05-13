@@ -14,9 +14,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * Created by Greg on 13/05/2017.
+ * @author Gregory Vesic
+ * @version 13/05/2017
  */
-
 public class AddCardActivity extends AppCompatActivity {
     User user;
 
@@ -24,6 +24,10 @@ public class AddCardActivity extends AppCompatActivity {
     int choice = -1;
     String cardType="";
 
+    /**
+     * Méthode onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +73,10 @@ public class AddCardActivity extends AppCompatActivity {
         Button back = (Button) findViewById(R.id.btnBack);
         back.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
+            /**
+             *  Méthode onClick
+             * @param activity_main
+             */
             @Override
             public void onClick(View activity_main)    //Au clic sur le bouton
             {

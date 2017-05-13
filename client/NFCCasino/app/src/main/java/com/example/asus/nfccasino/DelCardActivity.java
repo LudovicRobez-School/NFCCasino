@@ -14,9 +14,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * Created by Greg on 13/05/2017.
+ * @author Gregory Vesic
+ * @version 13/05/2017
  */
-
 public class DelCardActivity extends AppCompatActivity {
 
     User user;
@@ -26,6 +26,10 @@ public class DelCardActivity extends AppCompatActivity {
     String card="";
     double amount;
 
+    /**
+     * Méthode onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

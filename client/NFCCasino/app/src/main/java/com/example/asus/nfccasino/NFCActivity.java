@@ -13,15 +13,19 @@ import java.nio.charset.Charset;
 import java.util.Locale;
 
 /**
- * Created by Asus on 28/03/2017.
+ * @author Gregory Vesic
+ * @version 28/03/2017
  */
-
 public class NFCActivity extends AppCompatActivity {
     // Profil
     User user;
     // NFC
     NfcAdapter nfcAdapter;
 
+    /**
+     * Méthode onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +50,18 @@ public class NFCActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Méthode onPause
+     */
     protected void onPause()
     {
         super.onPause();
         nfcAdapter.disableForegroundNdefPush(this);
     }
 
+    /**
+     * Méthode onResume
+     */
     protected void onResume()
     {
         super.onResume();
@@ -60,6 +70,11 @@ public class NFCActivity extends AppCompatActivity {
         nfcAdapter.enableForegroundNdefPush(this, message);
     }
 
+    /**
+     * Méthode creerRecord
+     * @param message
+     * @return
+     */
     NdefRecord creerRecord(String message)
     {
         byte[] langBytes = Locale.ENGLISH.getLanguage().getBytes(Charset.forName("US-ASCII"));
@@ -72,6 +87,11 @@ public class NFCActivity extends AppCompatActivity {
         return new NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, new byte[0], data);
     }
 
+    /**
+     * Méthode creerMessage
+     * @param record
+     * @return
+     */
     NdefMessage creerMessage(NdefRecord record)
     {
         NdefRecord[] records = new NdefRecord[1];
