@@ -17,10 +17,12 @@ import java.util.*;
  * Created by ludov on 20/02/2017.
  * Source: http://www.cyril-rabat.fr/articles/index.php?article=53
  */
-public class Cryptography {
+public class CryptoRSA {
 
     private static final String privateKeyFile = "";
-    private static final String publicKeyFile = "";
+    //private static final String publicKeyFile = "";
+    //private static final String publicKeyFile = "SecretKeyForNFCC";
+    private static final String publicKeyFile = "test.txt"; // voir writeToFile() - MainActivity.java
 
    public static String chiffrementRSA (String encodedCode) {
        //Recuperation de la cle publique

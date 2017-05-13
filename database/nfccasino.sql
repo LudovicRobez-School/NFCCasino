@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Customer (
 );
 
 INSERT INTO Customer(c_id, c_mail, c_password, c_firstname, c_lastname, c_address, c_zipcode, c_city, c_state, c_country)
-VALUES (1, "test@mail.com", "test", "Michel", "DUPONT", "10 avenue de la Californie", "06200", "Nice", "PACA", "France");
+VALUES (1, "michel.dupont@gmail.com", "dupont123", "Michel", "DUPONT", "10 avenue de la Californie", "06200", "Nice", "PACA", "France");
 
 CREATE TABLE IF NOT EXISTS BankCard (
   b_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
