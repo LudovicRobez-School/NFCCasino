@@ -11,13 +11,13 @@ import java.util.Map;
  */
 public class CreditCardProviders {
 
-    private final static String CREDITCARD_QUERY = "SELECT * FROM CreditCard WHERE creditCardId = %1$d AND customerId = %2$s";
+    private final static String CREDITCARD_QUERY = "SELECT * FROM BankCard WHERE b_id = %1$d AND b_c_id = %2$s";
 
-    private final static String CREDITCARDS_QUERY = "SELECT * FROM CreditCard WHERE customerId = %1$s";
+    private final static String CREDITCARDS_QUERY = "SELECT * FROM BankCard WHERE b_c_id = %1$s";
 
-    private final static String DELETE_CREDITCARD = "INSERT INTO CreditCard (customerId, cardNumber, dateExpiration, cryptogram, type) VALUES ( %1$s, %2$s, %3$s, %4$d, %5$s)";
+    private final static String DELETE_CREDITCARD = "INSERT INTO BankCard (b_c_id, b_number, b_expDate, b_ctrlNumber, b_type) VALUES ( %1$s, %2$s, %3$s, %4$d, %5$s)";
 
-    private  final static  String INSERT_CREDITCARD = "DELETE FROM CreditCard WHERE creditCardId = %1$d";
+    private  final static  String INSERT_CREDITCARD = "DELETE FROM BankCard WHERE b_id = %1$d";
 
     public static Map<String, String> findCreditCardById(int creditCardId, String customerId) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {

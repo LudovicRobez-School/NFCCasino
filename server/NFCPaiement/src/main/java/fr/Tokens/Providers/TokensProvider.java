@@ -10,11 +10,11 @@ import java.util.Map;
  */
 public class TokensProvider {
 
-    private final static String TOKEN_QUERY = "SELECT * FROM Token WHERE uuid = %1$s";
+    private final static String TOKEN_QUERY = "SELECT * FROM Payment WHERE p_token = %1$s";
 
-    private final static String INSERT_TOKEN = "INSERT INTO Token (customerId, creditCardId, somme, uuid) VALUES ( %1$d, %2$d, %3$d, %4$s)";
+    private final static String INSERT_TOKEN = "INSERT INTO Payment (p_c_id, p_b_id, p_amount, p_token) VALUES ( %1$d, %2$d, %3$d, %4$s)";
 
-    private  final static  String DELETE_TOKEN = "DELETE FROM Token WHERE uuid = %1$s";
+    private  final static  String DELETE_TOKEN = "DELETE FROM Payment WHERE p_token = %1$s";
 
     public static Map<String, String> findTokenById(String token) throws Exception{
         try (DataBaseAccess db = DataBaseAccessImpl.getDbConnection()) {

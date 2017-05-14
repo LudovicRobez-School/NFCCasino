@@ -2,11 +2,6 @@ package fr.Security.AES;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.NoSuchAlgorithmException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import java.security.InvalidKeyException;
 
 /**
  * @author Cyril Rabat
@@ -28,15 +23,7 @@ public class Cryptography {
             chiffreur.init(Cipher.ENCRYPT_MODE, specification);
             bytes = chiffreur.doFinal(message.getBytes());
             return bytes.toString();
-        } catch (NoSuchAlgorithmException e) {
-            return null;
-        } catch (InvalidKeyException e) {
-            return null;
-        } catch (NoSuchPaddingException e) {
-            return null;
-        } catch (BadPaddingException e) {
-            return null;
-        } catch (IllegalBlockSizeException e) {
+        } catch (Exception e) {
             return null;
         }
     }
@@ -54,15 +41,7 @@ public class Cryptography {
             dechiffreur.init(Cipher.DECRYPT_MODE, specification);
             bytes = dechiffreur.doFinal(message.getBytes());
             return bytes.toString();
-        } catch (NoSuchAlgorithmException e) {
-            return null;
-        } catch (InvalidKeyException e) {
-            return null;
-        } catch (NoSuchPaddingException e) {
-            return null;
-        } catch (BadPaddingException e) {
-            return null;
-        } catch (IllegalBlockSizeException e) {
+        } catch (Exception e) {
             return null;
         }
     }

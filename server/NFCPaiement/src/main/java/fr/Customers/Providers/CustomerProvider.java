@@ -3,8 +3,6 @@ package fr.Customers.Providers;
 import fr.Data.Services.DataBaseAccess;
 import fr.Data.Services.DataBaseAccessImpl;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Map;
 
 
