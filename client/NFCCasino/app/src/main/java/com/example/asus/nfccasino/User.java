@@ -29,7 +29,7 @@ class User implements Parcelable {
 
     private String token; // plus tard
 
-    private static String urlServer= "http://192.168.0.31:8080/"; // a modifié selon le poste server
+    private static String urlServer= "http://192.168.0.31:8080/"; // a modifier selon le poste server
 
     /**
      * Constructeur User
@@ -269,28 +269,6 @@ class User implements Parcelable {
         Log.i("security", urlCrypt);
     }
 
-    /**
-     * Méthode getPublicKey
-     * @return
-     */
-    public boolean getPublicKey() {
-        String URL  = urlServer + "security";
-
-        Http requete = new Http();
-        requete.execute("GET",URL,"");
-        String result ="";
-        try {
-            result = requete.get();
-        }
-        catch(Exception e ){
-            Log.i("error", e.toString());
-        }
-        if(!result.equals("")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /**
      * Méthode getCustomer
@@ -311,6 +289,9 @@ class User implements Parcelable {
         catch(Exception e ){
             Log.i("error", e.toString());
         }
+
+        // Décrypter le résultat
+
         if(!result.equals("")) {
             Log.i("Public key",result);
             return result;
@@ -345,6 +326,115 @@ class User implements Parcelable {
         } else {
             Log.i("check", "error");
             return false;//"Email invalide !";
+        }
+    }
+
+    /**
+     * Méthode insertCustomer
+     * @param mail
+     * @param password
+     * @param firstname
+     * @param lastname
+     * @param address
+     * @param zipcode
+     * @param city
+     * @param state
+     * @param country
+     * @param balance
+     * @return
+     */
+    public static boolean insertCustomer(String mail, String password, String firstname, String lastname, String address, String zipcode, String city, String state, String country, String balance) throws JSONException {
+        String paramsCrypt = "";
+        String params= "";
+        JSONObject jsonParams = new JSONObject();
+        String URL  = urlServer + "customer/";
+
+        jsonParams.put("mail", mail);
+        jsonParams.put("firstname", firstname);
+        jsonParams.put("laststname", lastname);
+        jsonParams.put("address", address);
+        jsonParams.put("zipcode", zipcode);
+        jsonParams.put("city", city);
+        jsonParams.put("state", state);
+        jsonParams.put("country", country);
+        jsonParams.put("balance", balance);
+
+        params = jsonParams.toString();
+        //paramsCrypt = CryptoRSA.chiffrementRSA(params);
+
+        Http requete = new Http();
+        requete.execute("POST",URL, params);
+        String result ="";
+        try {
+            result = requete.get();
+            Log.i("result", result);
+            return true;
+        }
+        catch(Exception e ){
+            Log.i("error", e.toString());
+            return false;
+        }
+    }
+
+    /**
+     * Méthode getBalance
+     * @param email
+     * @return
+     */
+    public static String getBalance(String email) {
+        String urlCrypt = "";
+        urlCrypt = CryptoRSA.chiffrementRSA(email);
+        String URL  = urlServer + "customer/balance/" + urlCrypt;
+
+        Http requete = new Http();
+        requete.execute("GET",URL,"");
+        String result ="";
+        try {
+            result = requete.get();
+        }
+        catch(Exception e ){
+            Log.i("error", e.toString());
+        }
+
+        // Décrypter le résultat
+
+        if(!result.equals("")) {
+            Log.i("Balance",result);
+            return result;
+        } else {
+            return "Erreur de récupération des informations";
+        }
+    }
+
+    /**
+     * Méthode updateBalance
+     * @param email
+     * @param balance
+     * @return
+     */
+    public static boolean updateBalance(String email, double balance) throws JSONException {
+        String params = "";
+        String paramsCrypt= "";
+        JSONObject jsonParams = new JSONObject();
+        String URL  = urlServer + "customer/balance/";
+
+        jsonParams.put("mail", email);
+        jsonParams.put("balance", String.valueOf(balance));
+
+        params = jsonParams.toString();
+        //paramsCrypt = CryptoRSA.chiffrementRSA(email);
+
+        Http requete = new Http();
+        requete.execute("POST",URL,params);
+        String result ="";
+        try {
+            result = requete.get();
+            Log.i("result", result);
+            return true;
+        }
+        catch(Exception e ) {
+            Log.i("error", e.toString());
+            return false;
         }
     }
 

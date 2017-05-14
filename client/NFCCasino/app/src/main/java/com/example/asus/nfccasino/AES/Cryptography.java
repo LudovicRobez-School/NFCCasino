@@ -1,7 +1,13 @@
 package com.example.asus.nfccasino.AES;
 
+
+import android.text.TextUtils;
+import android.util.Base64;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.BadPaddingException;
@@ -42,13 +48,30 @@ public class Cryptography {
         }
     }
 
+    private static String getPassphraseSize16(String key) {
+        if (TextUtils.isEmpty(key)) {
+            return null;
+        }
+        char controlChar = '\u0014';
+        String key16 = key + controlChar;
+        if (key16.length() < 16) {
+            while (key16.length() < 16) {
+                key16 += key + controlChar;
+            }
+        }
+        if (key16.length() > 16) {
+            key16 = key16.substring(key16.length() - 16, key16.length());
+        }
+        return key16;
+    }
+
     /**
      * Methode dechiffrement.
      * @param message message que l'on veut dechiffrer
      */
     public static String dechiffrementAES (String message) {
         SecretKeySpec specification = new SecretKeySpec(secretKey.getBytes(), "AES");
-        byte[] bytes = null;
+        byte[] bytes;
         // Dechiffrement du message
         try {
             Cipher dechiffreur = Cipher.getInstance("AES");
@@ -56,15 +79,15 @@ public class Cryptography {
             bytes = dechiffreur.doFinal(message.getBytes());
             return bytes.toString();
         } catch (NoSuchAlgorithmException e) {
-            return null;
-        } catch (InvalidKeyException e) {
-            return null;
+            return e.toString();
         } catch (NoSuchPaddingException e) {
-            return null;
+            return e.toString();
+        } catch (InvalidKeyException e) {
+            return e.toString();
         } catch (BadPaddingException e) {
-            return null;
-        } catch (IllegalBlockSizeException e) {
-            return null;
+            return e.toString();
+        }  catch (IllegalBlockSizeException e) {
+            return e.toString();
         }
     }
 

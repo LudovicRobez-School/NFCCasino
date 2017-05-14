@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.asus.nfccasino.AES.Cryptography;
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
@@ -33,11 +35,24 @@ public class MainActivity extends AppCompatActivity {
          *  Evenements lors du clic sur les différents boutons
          */
 
-        Context context = getApplicationContext();
-        writeToFile("SecretKeyForNFCC", context);
-
         final EditText editLogin = (EditText) findViewById(R.id.editLogin);
         final EditText editMdp = (EditText) findViewById(R.id.editMdp);
+
+        Crypto crypto = new Crypto();
+        crypto.setPublicKeyRSAEnc(Crypto.getPublicKey());
+        crypto.setPublicKeyRSA(Cryptography.dechiffrementAES(crypto.getPublicKeyRSAEnc()));
+
+        //Log.i("getPublicKeyRSAEnc", crypto.getPublicKeyRSAEnc());
+        //Log.i("getPublicKeyRSA", crypto.getPublicKeyRSA());
+
+        String test;
+        String test2;
+
+        test = Cryptography.chiffrementAES("La crypto me soule grave");
+        Log.i("test", test);
+
+        test2 = Cryptography.dechiffrementAES(test);
+        Log.i("test2", test2);
 
         Button btnConnexion = (Button) findViewById(R.id.btnConnexion);   //Appel du Bouton
         btnConnexion.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
@@ -81,15 +96,5 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void writeToFile(String data,Context context) {
-        try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("test.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.write(data);
-            outputStreamWriter.close();
-            Log.i("writeToFile", "ok");
-        }
-        catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
+
 }
