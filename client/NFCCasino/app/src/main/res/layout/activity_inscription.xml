@@ -9,8 +9,8 @@
         android:text="Prénom :"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_alignBaseline="@+id/editPrenom"
-        android:layout_alignBottom="@+id/editPrenom"
+        android:layout_alignBaseline="@+id/editDateExp"
+        android:layout_alignBottom="@+id/editDateExp"
         android:layout_alignStart="@+id/txtNumber" />
 
     <TextView
@@ -57,8 +57,8 @@
         android:text="Nom :"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_alignBaseline="@+id/editNom"
-        android:layout_alignBottom="@+id/editNom"
+        android:layout_alignBaseline="@+id/editCtrlNumber"
+        android:layout_alignBottom="@+id/editCtrlNumber"
         android:layout_alignStart="@+id/txtExpDate" />
 
     <TextView
@@ -131,37 +131,37 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editNom"
+        android:id="@+id/editCtrlNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editAdresse"
         android:layout_alignStart="@+id/editAdresse"
-        android:layout_below="@+id/editPrenom"
+        android:layout_below="@+id/editDateExp"
         android:ems="10"
         android:hint="DUPONT"
         android:inputType="textPersonName"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editPrenom"
+        android:id="@+id/editDateExp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editNom"
-        android:layout_alignStart="@+id/editNom"
-        android:layout_below="@+id/editMail"
+        android:layout_alignLeft="@+id/editCtrlNumber"
+        android:layout_alignStart="@+id/editCtrlNumber"
+        android:layout_below="@+id/editNumber"
         android:ems="10"
         android:hint="Michel"
         android:inputType="textPersonName"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editMail"
+        android:id="@+id/editNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/txtNumber"
         android:layout_alignBottom="@+id/txtNumber"
-        android:layout_alignLeft="@+id/editPrenom"
-        android:layout_alignStart="@+id/editPrenom"
+        android:layout_alignLeft="@+id/editDateExp"
+        android:layout_alignStart="@+id/editDateExp"
         android:ems="10"
         android:hint="user@nfc.com"
         android:inputType="textPersonName"

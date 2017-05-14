@@ -269,7 +269,6 @@ class User implements Parcelable {
         Log.i("security", urlCrypt);
     }
 
-
     /**
      * Méthode getCustomer
      * @param email

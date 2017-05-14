@@ -14,8 +14,8 @@ import org.json.JSONObject;
 class CreditCard implements Parcelable {
     private int id;
     private int userId;
-    private int number;
-    private int expDate;
+    private long number;
+    private String expDate;
     private int ctrlNumber;
     private String type;
 
@@ -49,25 +49,25 @@ class CreditCard implements Parcelable {
      * Méthode getNumber
      * @return
      */
-    public int getNumber() {return number;}
+    public long getNumber() {return number;}
 
     /**
      * Méthode setNumber
      * @param number
      */
-    public void setNumber(int number) {this.number = number;}
+    public void setNumber(long number) {this.number = number;}
 
     /**
      * Méthode getExpDate
      * @return
      */
-    public int getExpDate() {return expDate;}
+    public String getExpDate() {return expDate;}
 
     /**
      * Méthode setExpDate
      * @param expDate
      */
-    public void setExpDate(int expDate) {this.expDate = expDate;}
+    public void setExpDate(String expDate) {this.expDate = expDate;}
 
     /**
      * Méthode getCtrlNumber
@@ -107,7 +107,7 @@ class CreditCard implements Parcelable {
      * @param ctrlNumber
      * @param type
      */
-    CreditCard(int id, int userId, int number, int expDate, int ctrlNumber, String type) {
+    CreditCard(int id, int userId, long number, String expDate, int ctrlNumber, String type) {
         this.id = id;
         this.userId = userId;
         this.number = number;
@@ -134,8 +134,8 @@ class CreditCard implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeInt(id);
         out.writeInt(userId);
-        out.writeInt(number);
-        out.writeInt(expDate);
+        out.writeLong(number);
+        out.writeString(expDate);
         out.writeInt(ctrlNumber);
         out.writeString(type);
     }
@@ -173,8 +173,8 @@ class CreditCard implements Parcelable {
     private CreditCard(Parcel in) {
         this.id = in.readInt();
         this.userId = in.readInt();
-        this.number = in.readInt();
-        this.expDate = in.readInt();
+        this.number = in.readLong();
+        this.expDate = in.readString();
         this.ctrlNumber = in.readInt();
         this.type = in.readString();
     }
@@ -189,15 +189,15 @@ class CreditCard implements Parcelable {
      * @return
      * @throws JSONException
      */
-    public static boolean addCreditCard(int userId, int number, int expDate, int ctrlNumber, String type) throws JSONException {
+    public static boolean addCreditCard(int userId, long number, String expDate, int ctrlNumber, String type) throws JSONException {
         String params = "";
         String paramsCrypt= "";
         JSONObject jsonParams = new JSONObject();
         String URL  = urlServer + "creditcard/";
 
         jsonParams.put("customerId", Integer.valueOf(userId));
-        jsonParams.put("cardNumber", Integer.valueOf(number));
-        jsonParams.put("dateExpiration", Integer.valueOf(expDate));
+        jsonParams.put("cardNumber", Long.valueOf(number));
+        jsonParams.put("dateExpiration", expDate);
         jsonParams.put("cryptogram", Integer.valueOf(ctrlNumber));
         jsonParams.put("type", type);
 

@@ -6,8 +6,8 @@
         android:id="@+id/txtExpDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editPrenom"
-        android:layout_alignBottom="@+id/editPrenom"
+        android:layout_alignBaseline="@+id/editDateExp"
+        android:layout_alignBottom="@+id/editDateExp"
         android:layout_alignStart="@+id/txtCryptogram"
         android:text="Date d'éxpiration :"
         android:textSize="18sp"
@@ -17,8 +17,8 @@
         android:id="@+id/txtNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editMail"
-        android:layout_alignBottom="@+id/editMail"
+        android:layout_alignBaseline="@+id/editNumber"
+        android:layout_alignBottom="@+id/editNumber"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="22dp"
         android:layout_marginStart="12dp"
@@ -30,15 +30,15 @@
         android:id="@+id/txtCryptogram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editNom"
-        android:layout_alignBottom="@+id/editNom"
+        android:layout_alignBaseline="@+id/editCtrlNumber"
+        android:layout_alignBottom="@+id/editCtrlNumber"
         android:layout_alignStart="@+id/txtType"
         android:text="Cryptogramme :"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editNom"
+        android:id="@+id/editCtrlNumber"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -46,15 +46,15 @@
         android:inputType="textPersonName"
         android:textSize="18sp"
         android:layout_marginTop="13dp"
-        android:layout_below="@+id/editPrenom"
+        android:layout_below="@+id/editDateExp"
         android:layout_alignStart="@+id/listCardType" />
 
     <EditText
-        android:id="@+id/editPrenom"
+        android:id="@+id/editDateExp"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/editNom"
-        android:layout_below="@+id/editMail"
+        android:layout_alignStart="@+id/editCtrlNumber"
+        android:layout_below="@+id/editNumber"
         android:layout_marginTop="18dp"
         android:ems="10"
         android:hint="01/01"
@@ -62,16 +62,16 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editMail"
+        android:id="@+id/editNumber"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="0000 0000 0000 0000"
-        android:inputType="textPersonName"
-        android:textSize="18sp"
-        android:layout_marginTop="38dp"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/editPrenom" />
+        android:layout_alignStart="@+id/editDateExp"
+        android:layout_marginTop="38dp"
+        android:ems="10"
+        android:hint="0000000000000000"
+        android:inputType="textPersonName"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btnBack"
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:text="Retour"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:id="@+id/txtType"
@@ -96,7 +96,7 @@
         android:layout_width="200dp"
         android:layout_height="150dp"
         android:scrollbars="vertical"
-        android:layout_below="@+id/editNom"
+        android:layout_below="@+id/editCtrlNumber"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp" />
 

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class DelCardActivity extends AppCompatActivity {
 
     User user;
+    CreditCard creditCard;
 
     ArrayList<String> listCard = new ArrayList<>();
     int choice = -1;
@@ -36,10 +37,20 @@ public class DelCardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_delcard);
 
         user = getIntent().getExtras().getParcelable("user");
+        creditCard = getIntent().getExtras().getParcelable("creditCard");
 
+        /*
         listCard.add("132" + "* **** **** ****");
         listCard.add("497" + "* **** **** ****");
         listCard.add("851" + "* **** **** ****");
+        */
+        if (creditCard.getNumber() != 0) {
+            listCard.add(String.valueOf(creditCard.getNumber()).substring(0, 3) + "* **** **** ****");
+        } else {
+            listCard.add("000" + "* **** **** ****");
+        }
+        // Faire boucle lisant getAllCreditCards()
+        // Ajouter dans la liste listCard.add();
 
         ListView lvCard = (ListView) findViewById(R.id.listCardType);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(DelCardActivity.this,
@@ -56,12 +67,13 @@ public class DelCardActivity extends AppCompatActivity {
             }
         });
 
-        Button btnCredit = (Button) findViewById(R.id.btnCredit);
-        btnCredit.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
+        Button btnDel = (Button) findViewById(R.id.btnAddCredit);
+        btnDel.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
             @Override
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
+                // creditCard.deleteCreditCard(id);
                 Context context = getApplicationContext();
                 CharSequence text = card;
                 int duration = Toast.LENGTH_SHORT;

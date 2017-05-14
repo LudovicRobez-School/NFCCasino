@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import java.util.ArrayList;
  */
 public class AddCardActivity extends AppCompatActivity {
     User user;
+    CreditCard creditCard;
 
     ArrayList<String> listCard = new ArrayList<>();
     int choice = -1;
@@ -34,6 +37,7 @@ public class AddCardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_addcard);
 
         user = getIntent().getExtras().getParcelable("user");
+        creditCard = getIntent().getExtras().getParcelable("creditCard");
 
         listCard.add("EuroCard/ MasterCard");
         listCard.add("Visa");
@@ -55,17 +59,35 @@ public class AddCardActivity extends AppCompatActivity {
             }
         });
 
+        final EditText editNumber = (EditText) findViewById(R.id.editNumber);
+        final EditText editDateExp = (EditText) findViewById(R.id.editDateExp);
+        final EditText editCtrlNumber = (EditText) findViewById(R.id.editCtrlNumber);
+
         Button btnAdd = (Button) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
             @Override
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
+            if (editNumber.getText().toString() != null && editDateExp.getText().toString() != null && editCtrlNumber != null && cardType != null) {
+                creditCard.setNumber(Long.valueOf(editNumber.getText().toString()));
+                creditCard.setExpDate(editDateExp.getText().toString());
+                creditCard.setCtrlNumber(Integer.valueOf(editCtrlNumber.getText().toString()));
+                creditCard.setType(cardType);
+                Log.i("creditCard", creditCard.getNumber() + " " + creditCard.getExpDate() + " " + creditCard.getCtrlNumber() + " " + creditCard.getType());
+                // addCreditCard()
                 Context context = getApplicationContext();
-                CharSequence text = cardType;
+                CharSequence text = "Ajout de la carte " + cardType + " effectuée.";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+            } else {
+                Context context = getApplicationContext();
+                CharSequence text = "Veuillez remplir tous les champs.";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
             }
 
         });
@@ -82,6 +104,7 @@ public class AddCardActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(AddCardActivity.this, ProfilActivity.class);  //Lancer l'activité
                 intent.putExtra("user", user); // Envoyer l'activité
+                intent.putExtra("creditCard", creditCard); // Envoyer l'activité
                 startActivity(intent);    //Afficher la vue
                 finish();
             }

@@ -38,10 +38,11 @@ public class MainActivity extends AppCompatActivity {
         final EditText editLogin = (EditText) findViewById(R.id.editLogin);
         final EditText editMdp = (EditText) findViewById(R.id.editMdp);
 
+        /*
         Crypto crypto = new Crypto();
         crypto.setPublicKeyRSAEnc(Crypto.getPublicKey());
         crypto.setPublicKeyRSA(Cryptography.dechiffrementAES(crypto.getPublicKeyRSAEnc()));
-
+        */
         //Log.i("getPublicKeyRSAEnc", crypto.getPublicKeyRSAEnc());
         //Log.i("getPublicKeyRSA", crypto.getPublicKeyRSA());
 
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
                 user = new User(editLogin.getText().toString());
+                // TEST
+                user.setBalance(0.0);
                 if (editLogin.getText().toString().equals("test") && editMdp.getText().toString().equals("test")){
                 //if (User.checkCustomer(user, editLogin.getText().toString(), editMdp.getText().toString()) == true) {
                     user = new User(editLogin.getText().toString());

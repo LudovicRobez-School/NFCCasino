@@ -14,7 +14,20 @@ import android.util.Log;
 public class MyHostApduService extends HostApduService {
 
 	private int messageCounter = 0;
-	String token = "TEST";
+	private String token = "value";
+
+	/**
+	 * Méthode getToken
+	 * @return
+	 */
+	public String getToken() {return token;}
+
+	/**
+	 * Méthode setToken
+	 * @param token
+	 */
+	public void setToken(String token) {this.token = token;}
+
 
 	/**
 	 * Méthode processCommandApdu
@@ -26,6 +39,7 @@ public class MyHostApduService extends HostApduService {
 	public byte[] processCommandApdu(byte[] apdu, Bundle extras) {
 		if (selectAidApdu(apdu)) {
 			Log.i("HCEDEMO", "Application selected");
+			Log.i("token", token);
 			return getWelcomeMessage();
 		}
 		else {
@@ -39,7 +53,7 @@ public class MyHostApduService extends HostApduService {
 	 * @return
 	 */
 	private byte[] getWelcomeMessage() {
-		byte[] tabRep = {token.getBytes()[0], token.getBytes()[1], token.getBytes()[2], token.getBytes()[3], (byte)0x90, (byte)0x00};
+		byte[] tabRep = {token.getBytes()[0], token.getBytes()[1], token.getBytes()[2], token.getBytes()[3], token.getBytes()[4], (byte)0x90, (byte)0x00};
         return tabRep;
 	}
 

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class CreditActivity extends AppCompatActivity {
 
     User user;
+    CreditCard creditCard;
 
     ArrayList<String> listCard = new ArrayList<>();
     int choice = -1;
@@ -37,12 +38,20 @@ public class CreditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_credit);
 
         user = getIntent().getExtras().getParcelable("user");
+        creditCard = getIntent().getExtras().getParcelable("creditCard");
 
         final EditText editAmount = (EditText) findViewById(R.id.editAmount);
 
+        /*
         listCard.add("132" + "* **** **** ****");
         listCard.add("497" + "* **** **** ****");
         listCard.add("851" + "* **** **** ****");
+        */
+        if (creditCard.getNumber() != 0) {
+            listCard.add(String.valueOf(creditCard.getNumber()).substring(0, 3) + "* **** **** ****");
+        } else {
+            listCard.add("000" + "* **** **** ****");
+        }
 
         ListView lvCard = (ListView) findViewById(R.id.listCardType);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(CreditActivity.this,
@@ -59,15 +68,17 @@ public class CreditActivity extends AppCompatActivity {
             }
         });
 
-        Button btnCredit = (Button) findViewById(R.id.btnCredit);
+        Button btnCredit = (Button) findViewById(R.id.btnAddCredit);
         btnCredit.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton
         {
             @Override
             public void onClick(View activity_main)    //Au clic sur le bouton
             {
                 amount = Double.valueOf(editAmount.getText().toString());
+                // updateBalance(user.getMail(), amount)
+                user.setBalance(user.getBalance() + amount);
                 Context context = getApplicationContext();
-                CharSequence text = card + " - " + amount;
+                CharSequence text = "Transaction de " + amount + "€ effectuée.";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
@@ -83,6 +94,7 @@ public class CreditActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(CreditActivity.this, ProfilActivity.class);  //Lancer l'activité
                 intent.putExtra("user", user); // Envoyer l'activité
+                intent.putExtra("creditCard", creditCard); // Envoyer l'activité
                 startActivity(intent);    //Afficher la vue
                 finish();
             }
