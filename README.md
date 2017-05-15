@@ -3,9 +3,9 @@
 ![Github](https://github.com/LudovicRobez/NFCCasino/blob/master/client/NFCCasino/app/src/main/res/drawable/nfccasino.png)
 
 ## Equipe :  
-	* ROBEZ Ludovic
-	* FOUCAULT Marc
-	* VESIC Gregory
+	Server: 				ROBEZ Ludovic
+	Application console: 	FOUCAULT Marc
+	Application Android: 	VESIC Gregory
 
 ### Avant de lancer le Projet :
 	
@@ -31,12 +31,12 @@
 	1/ Lancer MySQL WorkBench
 		- Se connecter sur NFCCASINO
 	2/ Lancer la console CMD depuis /server et lancer le server :
-		- Touche Windows + R
+		- Au clavier : Windows + R
 		- Saisir : cmd
-		- mvn clean package
-		- mvn jetty:run
+		- Saisir : mvn clean package
+		- Saisir : mvn jetty:run
 	3/ Lancer la console CMD et récupérer l'adresse IP du réseau local du poste
-		- Touche Windows + R
+		- Au clavier Windows + R
 		- Saisir : cmd
 		- Saisir : ipconfig
 		- Récupérer "Adresse IPv4"
@@ -48,7 +48,7 @@
 		- https://github.com/LudovicRobez/NFCCasino/blob/master/client/NFCCasino/app/src/main/java/com/example/asus/nfccasino/CreditCard.java
 		- https://github.com/LudovicRobez/NFCCasino/blob/master/client/NFCCasino/app/src/main/java/com/example/asus/nfccasino/Payment.java
 	6/ Compiler et générer l'application
-		- Sélection l'onglet "Run"
+		- Sélectionner l'onglet "Run"
 		- Sélectionner l'option "Run"
 	7/ Sélectionner votre smartphone
 		- S'assurer que le téléphone a le mode débug d'activer
@@ -56,4 +56,4 @@
 			- Tout en bas, allez dans À propos de l'appareil.
 			- Appuyez plusieurs fois (sept fois) sur la case Numéro de build, jusqu'à ce qu'un message s'affiche "Vous êtes maintenant un développeur".
 	8/ Lancer l'application via votre Smartphone
-		- Pour le moindre détails sur l'utilisation, voir https://github.com/LudovicRobez/NFCCasino/blob/master/Rapports/Notice_Utilisation_NFCCasino.pdf
+		- Pour le moindre détails sur l'utilisation, voir : https://github.com/LudovicRobez/NFCCasino/blob/master/Rapports/Notice_Utilisation_NFCCasino.pdf
