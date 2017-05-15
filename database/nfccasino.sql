@@ -1,8 +1,5 @@
-DROP database `nfccasino`;
+--DROP database `nfccasino`;
 
-/*
-DROP DATABASE `nfccasino`;
-*/
 CREATE DATABASE  IF NOT EXISTS `nfccasino` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `nfccasino`;
 
