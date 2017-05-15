@@ -1,12 +1,11 @@
 ﻿# NFCCASINO
+
+![Github](https://github.com/LudovicRobez/NFCCasino/blob/master/client/NFCCasino/app/src/main/res/drawable/nfccasino.png)
+
 ## Equipe :  
 	* ROBEZ Ludovic
 	* FOUCAULT Marc
 	* VESIC Gregory
-
-
-![Github](https://github.com/LudovicRobez/NFCCasino/blob/master/client/NFCCasino/app/src/main/res/drawable/nfccasino.png)
-
 
 ### Avant de lancer le Projet :
 	
