@@ -16,7 +16,8 @@ import static org.easymock.EasyMock.expect;
  */
 public class CryptographyTest {
 
-    private Cipher cipher;
+    Cipher cipher;
+
     @Before
     public void setUp() throws Exception {
         cipher = EasyMock.createMock(Cipher.class);

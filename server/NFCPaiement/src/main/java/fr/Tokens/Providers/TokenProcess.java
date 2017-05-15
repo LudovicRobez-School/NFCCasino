@@ -4,37 +4,26 @@ package fr.Tokens.Providers;
  * Created by rl613611 on 28/02/2017.
  */
 
+import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
-
-import java.lang.String;
-import java.util.ArrayList;
-import java.util.UUID;
-
-import com.paypal.api.payments.Address;
-import com.paypal.api.payments.Amount;
-import com.paypal.api.payments.CreditCard;
-import com.paypal.api.payments.Details;
-import com.paypal.api.payments.FundingInstrument;
-import com.paypal.api.payments.Payer;
-import com.paypal.api.payments.Payment;
-import com.paypal.api.payments.Transaction;
-
 import fr.Customers.Ressources.Customer;
 import fr.Tokens.Ressources.Token;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class TokenProcess {
 
     // Replace with your application client ID and secret
-    String clientId = "YOUR APPLICATION CLIENT ID";
-    String clientSecret = "YOUR APPLICATION CLIENT SECRET";
+    private static String clientId = "YOUR APPLICATION CLIENT ID";
+    private static String clientSecret = "YOUR APPLICATION CLIENT SECRET";
+    private static APIContext context = new APIContext(clientId, clientSecret, "sandbox");
 
-    APIContext context = new APIContext(clientId, clientSecret, "sandbox");
-
-    public boolean processPaiement(Payment payment){
+    public static boolean processPaiement(Payment payment){
         try {
             // Create payment
-          Payment createdPayment = payment.create(context);
+            Payment createdPayment = payment.create(context);
             System.out.println("Created payment with id = " + createdPayment.getId());
             return true;
         } catch (PayPalRESTException e) {
@@ -43,7 +32,7 @@ public class TokenProcess {
         }
     }
 
-    public Payment initPaiement(fr.CreditCards.Ressources.CreditCard myCreditCard, Customer customer, Token token){
+    public static Payment initPaiement(fr.CreditCards.Ressources.CreditCard myCreditCard, Customer customer, Token token){
         // Set address info
         Address billingAddress = new Address();
         billingAddress.setCity(customer.getCity());
