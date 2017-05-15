@@ -3,6 +3,7 @@ package fr.Security.RSA;
 import org.codehaus.jettison.json.JSONObject;
 
 import javax.crypto.Cipher;
+import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class Cryptography {
        try {
            Cipher chiffreur = Cipher.getInstance("RSA");
            chiffreur.init(Cipher.ENCRYPT_MODE, clePublique);
-           bytes = chiffreur.doFinal(encodedCode.getBytes());
+           bytes = chiffreur.doFinal(encodedCode.getBytes(StandardCharsets.UTF_8));
            return bytes.toString();
        } catch (Exception e) {
           return null;
@@ -44,7 +45,7 @@ public class Cryptography {
         PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(RSAKeyManagement.privateKeyFile);
 
         // Déchiffrement du message
-        byte[] bytes = encodedCode.getBytes();
+        byte[] bytes = encodedCode.getBytes(StandardCharsets.UTF_8);
         try {
             Cipher dechiffreur = Cipher.getInstance("RSA");
             dechiffreur.init(Cipher.DECRYPT_MODE, clePrivee);

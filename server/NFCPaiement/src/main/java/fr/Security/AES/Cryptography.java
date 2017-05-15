@@ -2,6 +2,7 @@ package fr.Security.AES;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author Cyril Rabat
@@ -16,12 +17,13 @@ public class Cryptography {
      * @param message message que l'on veut chiffrer
      */
     public static String chiffrementAES(String message) {
-        SecretKeySpec specification = new SecretKeySpec(secretKey.getBytes(), "AES");
+
         byte[] bytes = null;
         try {
+            SecretKeySpec specification = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
             Cipher chiffreur = Cipher.getInstance("AES");
             chiffreur.init(Cipher.ENCRYPT_MODE, specification);
-            bytes = chiffreur.doFinal(message.getBytes());
+            bytes = chiffreur.doFinal(message.getBytes(StandardCharsets.UTF_8));
             return bytes.toString();
         } catch (Exception e) {
             return null;
@@ -33,14 +35,14 @@ public class Cryptography {
      * @param message message que l'on veut dechiffrer
      */
     public static String dechiffrementAES (String message) {
-        SecretKeySpec specification = new SecretKeySpec(secretKey.getBytes(), "AES");
-        byte[] bytes = null;
+        byte[] bytes;
         // Dechiffrement du message
         try {
+            SecretKeySpec specification = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
             Cipher dechiffreur = Cipher.getInstance("AES");
             dechiffreur.init(Cipher.DECRYPT_MODE, specification);
-            bytes = dechiffreur.doFinal(message.getBytes());
-            return bytes.toString();
+            bytes = dechiffreur.doFinal(message.getBytes(StandardCharsets.UTF_8));
+            return new String(bytes);
         } catch (Exception e) {
             return null;
         }
