@@ -3,8 +3,8 @@
 ![Github](https://github.com/LudovicRobez/NFCCasino/blob/master/client/NFCCasino/app/src/main/res/drawable/nfccasino.png)
 
 ## Equipe :  
-	Server: 			ROBEZ Ludovic
-	Application console: 	FOUCAULT Marc
+	Chef projet/Server:		ROBEZ Ludovic
+	Application Console: 	FOUCAULT Marc
 	Application Android: 	VESIC Gregory
 
 ### Avant de lancer le Projet :
