@@ -41,19 +41,19 @@ public class MainActivity extends AppCompatActivity {
         /*
         Crypto crypto = new Crypto();
         crypto.setPublicKeyRSAEnc(Crypto.getPublicKey());
-        crypto.setPublicKeyRSA(Cryptography.dechiffrementAES(crypto.getPublicKeyRSAEnc()));
+        crypto.setPublicKeyRSA(CryptoRSA.dechiffrementAES(crypto.getPublicKeyRSAEnc()));
         */
         //Log.i("getPublicKeyRSAEnc", crypto.getPublicKeyRSAEnc());
         //Log.i("getPublicKeyRSA", crypto.getPublicKeyRSA());
 
-        String test;
-        String test2;
+        String test="";
+        String test2="";
 
-        test = Cryptography.chiffrementAES("La crypto me soule grave");
+        test = Cryptography.chiffrementAES("Ceci est un test");
         Log.i("test", test);
 
         test2 = Cryptography.dechiffrementAES(test);
-        Log.i("test2", test2);
+        Log.i("test2", ""+test2);
 
         Button btnConnexion = (Button) findViewById(R.id.btnConnexion);   //Appel du Bouton
         btnConnexion.setOnClickListener(new View.OnClickListener()      //Creation du listener sur ce bouton

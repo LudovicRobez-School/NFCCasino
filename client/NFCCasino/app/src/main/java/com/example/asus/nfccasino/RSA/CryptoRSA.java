@@ -1,17 +1,14 @@
 package com.example.asus.nfccasino.RSA;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by ludov on 20/02/2017.
@@ -19,37 +16,19 @@ import java.util.*;
  */
 public class CryptoRSA {
 
-    private static final String privateKeyFile = "";
-    //private static final String publicKeyFile = "";
-    //private static final String publicKeyFile = "SecretKeyForNFCC";
-    private static final String publicKeyFile = "test.txt"; // voir writeToFile() - MainActivity.java
-
-    /**
-     * Méthode de chiffrement RSA
-     * @param encodedCode
-     * @return
-     */
    public static String chiffrementRSA (String encodedCode) {
        //Recuperation de la cle publique
-       PublicKey clePublique = RSAKeyManagement.lectureClePublique(publicKeyFile);
+       PublicKey clePublique = RSAKeyManagement.lectureClePublique(RSAKeyManagement.publicKeyFile);
 
        // Chiffrement du message
        byte[] bytes = null;
        try {
            Cipher chiffreur = Cipher.getInstance("RSA");
            chiffreur.init(Cipher.ENCRYPT_MODE, clePublique);
-           bytes = chiffreur.doFinal(encodedCode.getBytes());
+           bytes = chiffreur.doFinal(encodedCode.getBytes(StandardCharsets.UTF_8));
            return bytes.toString();
-       } catch (BadPaddingException e) {
+       } catch (Exception e) {
           return null;
-       } catch (IllegalBlockSizeException e) {
-           return null;
-       } catch (NoSuchPaddingException e) {
-           return null;
-       } catch (InvalidKeyException e) {
-           return null;
-       } catch (NoSuchAlgorithmException e) {
-           return null;
        }
    }
 
@@ -58,10 +37,27 @@ public class CryptoRSA {
     * @param encodedCode message à déchiffrer
     */
 
-    public static Map<String, String> dechiffrementRSA(String encodedCode) {
+    public static String dechiffrementPathRSA(String encodedCode) {
 
         // Récupération de la clé privée
-        PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(privateKeyFile);
+        PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(RSAKeyManagement.privateKeyFile);
+
+        // Déchiffrement du message
+        byte[] bytes = encodedCode.getBytes(StandardCharsets.UTF_8);
+        try {
+            Cipher dechiffreur = Cipher.getInstance("RSA");
+            dechiffreur.init(Cipher.DECRYPT_MODE, clePrivee);
+            bytes = dechiffreur.doFinal(bytes);
+            return bytes.toString();
+        } catch(Exception e) {
+            return null;
+        }
+    }
+
+    public static Map<String, String> dechiffrementJsonRSA(String encodedCode) {
+
+        // Récupération de la clé privée
+        PrivateKey clePrivee = RSAKeyManagement.lectureClePrivee(RSAKeyManagement.privateKeyFile);
 
         // Déchiffrement du message
         byte[] bytes = encodedCode.getBytes();
@@ -77,20 +73,9 @@ public class CryptoRSA {
                 mapJSON.put(key, obj.getString(key));
             }
             return mapJSON;
-        } catch(NoSuchAlgorithmException e) {
-            return null;
-        } catch(NoSuchPaddingException e) {
-            return null;
-        } catch(InvalidKeyException e) {
-            return null;
-        } catch(IllegalBlockSizeException e) {
-            return null;
-        } catch(BadPaddingException e) {
-            return null;
-        } catch (JSONException e) {
+        } catch(Exception e) {
             return null;
         }
-
     }
-
+    
 }

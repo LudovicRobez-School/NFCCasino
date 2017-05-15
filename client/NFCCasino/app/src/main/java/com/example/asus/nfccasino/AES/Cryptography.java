@@ -1,18 +1,8 @@
 package com.example.asus.nfccasino.AES;
 
-
-import android.text.TextUtils;
-import android.util.Base64;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import java.security.InvalidKeyException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author Cyril Rabat
@@ -20,7 +10,6 @@ import java.security.InvalidKeyException;
  */
 public class Cryptography {
 
-    //private static String secretKey = "SecretKeyForNFCCasino";
     private static String secretKey = "SecretKeyForNFCC";
 
     /**
@@ -28,41 +17,17 @@ public class Cryptography {
      * @param message message que l'on veut chiffrer
      */
     public static String chiffrementAES(String message) {
-        SecretKeySpec specification = new SecretKeySpec(secretKey.getBytes(), "AES");
+
         byte[] bytes = null;
         try {
+            SecretKeySpec specification = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
             Cipher chiffreur = Cipher.getInstance("AES");
             chiffreur.init(Cipher.ENCRYPT_MODE, specification);
-            bytes = chiffreur.doFinal(message.getBytes());
+            bytes = chiffreur.doFinal(message.getBytes(StandardCharsets.UTF_8));
             return bytes.toString();
-        } catch (NoSuchAlgorithmException e) {
-            return e.toString();
-        } catch (InvalidKeyException e) {
-            return e.toString();
-        } catch (NoSuchPaddingException e) {
-            return e.toString();
-        } catch (BadPaddingException e) {
-            return e.toString();
-        } catch (IllegalBlockSizeException e) {
-            return e.toString();
-        }
-    }
-
-    private static String getPassphraseSize16(String key) {
-        if (TextUtils.isEmpty(key)) {
+        } catch (Exception e) {
             return null;
         }
-        char controlChar = '\u0014';
-        String key16 = key + controlChar;
-        if (key16.length() < 16) {
-            while (key16.length() < 16) {
-                key16 += key + controlChar;
-            }
-        }
-        if (key16.length() > 16) {
-            key16 = key16.substring(key16.length() - 16, key16.length());
-        }
-        return key16;
     }
 
     /**
@@ -70,23 +35,16 @@ public class Cryptography {
      * @param message message que l'on veut dechiffrer
      */
     public static String dechiffrementAES (String message) {
-        SecretKeySpec specification = new SecretKeySpec(secretKey.getBytes(), "AES");
         byte[] bytes;
         // Dechiffrement du message
         try {
+            SecretKeySpec specification = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
             Cipher dechiffreur = Cipher.getInstance("AES");
             dechiffreur.init(Cipher.DECRYPT_MODE, specification);
-            bytes = dechiffreur.doFinal(message.getBytes());
-            return bytes.toString();
-        } catch (NoSuchAlgorithmException e) {
-            return e.toString();
-        } catch (NoSuchPaddingException e) {
-            return e.toString();
-        } catch (InvalidKeyException e) {
-            return e.toString();
-        } catch (BadPaddingException e) {
-            return e.toString();
-        }  catch (IllegalBlockSizeException e) {
+            bytes = dechiffreur.doFinal(message.getBytes(StandardCharsets.UTF_8));
+            return new String(bytes);
+        } catch (Exception e) {
+            //return null;
             return e.toString();
         }
     }
