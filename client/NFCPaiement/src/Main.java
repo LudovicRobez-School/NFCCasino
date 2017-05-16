@@ -1,4 +1,6 @@
 import NFC.NFCProcess;
+import Token.TokenProcess;
+
 import javax.smartcardio.*;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -16,8 +18,8 @@ public class Main {
                     TimeUnit.SECONDS.sleep(5);
                     JOptionPane.showMessageDialog(null, "Voulez-vous faire un paiement?");
                     Map<String, String> responseAPDU = NFCProcess.sendCommandAPDU(terminal);
-                    //TODO: PaiementProcess
-                    JOptionPane.showMessageDialog(null, "Paiement Accepté!/nNom: "+ "" +"/nPrenom: " +""+ "/nSomme: "+"");
+                    TokenProcess.requete(responseAPDU.get("token"));
+                    JOptionPane.showMessageDialog(null, "Paiement Accepté!");
                 }catch (Exception e){
                     e.printStackTrace();
                     System.out.println("error: " + e.getMessage());
