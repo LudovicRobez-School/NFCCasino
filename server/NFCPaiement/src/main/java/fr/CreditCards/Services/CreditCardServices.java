@@ -12,20 +12,20 @@ public interface CreditCardServices {
     @GET
     @Path("/{EncodedInfos}")
     @Produces(MediaType.APPLICATION_JSON)
-    Response getAllCreditCards(String EncodedInfos);
+    Response getAllCreditCards(@PathParam("EncodedInfos") String EncodedInfos);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    Response addCreditCard(String EncodedInfos);
+    Response addCreditCard(String EncodedJson);
 
     @GET
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    Response getCreditCard( String EncodedInfos);
+    Response getCreditCard( String EncodedJson);
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    Response deleteCreditCard(String EncodedInfos);
+    Response deleteCreditCard(String EncodedJson);
 
 }

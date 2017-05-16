@@ -8,10 +8,13 @@ import fr.Security.RSA.Cryptography;
 import fr.Tokens.Providers.TokenProcess;
 import fr.Tokens.Providers.TokensProvider;
 import fr.Tokens.Ressources.Token;
+import org.codehaus.jettison.json.JSONObject;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -22,11 +25,18 @@ public class TokenServicesImpl implements TokenServices {
     @Override
     public Response addPaiement(String EncodedJson) {
         try {
-            Map<String, String> json = Cryptography.dechiffrementJsonRSA(EncodedJson);
+            //Map<String, String> json = Cryptography.dechiffrementJsonRSA(EncodedJson);
+            Map<String, String> json = new HashMap<>();
+            JSONObject obj = new JSONObject(EncodedJson);
+            Iterator keys = obj.keys();
+            while (keys.hasNext()) {
+                String key = (String) keys.next();
+                json.put(key, obj.getString(key));
+            }
             String token = TokenProcess.generateToken();
             json.put("token", token);
             TokensProvider.insertToken(json);
-            return Response.status(Response.Status.CREATED).entity(Cryptography.chiffrementRSA(token)).build();
+            return Response.status(Response.Status.CREATED).entity(json.get("token")).build();
         } catch (Exception e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -35,8 +45,8 @@ public class TokenServicesImpl implements TokenServices {
     @Override
     public Response getPaiement(@PathParam("EncodedInfos") String EncodedInfos) {
         try{
-            String tokenKey= Cryptography.dechiffrementPathRSA(EncodedInfos);
-            Token token = new Token(TokensProvider.findTokenById(tokenKey));
+            //String tokenKey= Cryptography.dechiffrementPathRSA(EncodedInfos);
+            Token token = new Token(TokensProvider.findTokenById(EncodedInfos));
             Customer customer = new Customer(CustomerProvider.findCustomerById(token.getCustomerId()));
             CreditCard creditCard = new CreditCard(CreditCardProviders.findCreditCardById(token.getCreditCardId(), token.getCustomerId()));
             TokenProcess paiementProcess = new TokenProcess();
@@ -50,8 +60,8 @@ public class TokenServicesImpl implements TokenServices {
     @Override
     public Response deletePaiement(@PathParam("EncodedInfos") String EncodedInfos) {
         try{
-            String tokenKey = Cryptography.dechiffrementPathRSA(EncodedInfos);
-            TokensProvider.deleteToken(tokenKey);
+            //String tokenKey = Cryptography.dechiffrementPathRSA(EncodedInfos);
+            TokensProvider.deleteToken(EncodedInfos);
             return Response.ok().build();
         }catch (Exception e){
             return Response.status(Response.Status.NOT_FOUND).build();
